@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "UpdateR",
+  "description": "This extension allows the user to view differences between two versions of the same web page.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}
