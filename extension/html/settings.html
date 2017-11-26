@@ -64,9 +64,9 @@ div.tab button.active {
 </div>
 
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">View</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Ignoring URLs</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+  <button class="tablinks" onclick="openTab(event, 'London')">View</button>
+  <button class="tablinks" onclick="openTab(event, 'Paris')">Ignoring URLs</button>
+  <button class="tablinks" onclick="openTab(event, 'Tokyo')">Tokyo</button>
 </div>
 
 
@@ -92,7 +92,7 @@ div.tab button.active {
 </div>
 
 <script>
-function openCity(evt, cityName) {
+function openTab(evt, cityName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
