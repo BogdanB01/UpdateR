@@ -2,28 +2,110 @@
 
 <html>
 <head>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+  background: #F8F8F8}
 
-    <style>
-      body {
-        min-width: 250px;
-        min-height: 350px;
-      }
-      #logo{
-        display: block;
-        position: relative;
-        top: 15px;
-        margin: 0px auto;
-      }
-    </style>
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+.header img {
+  float: left;
+  width: 50px;
+  height: 54px;
+  background: #555;
+}
+
+.header h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
+</style>
 </head>
+<br><br>
+<div class="header">
+  <img src="../images/updtlogo.png" alt="logo">
+  <h1><b>updateR Options</b></h1>
+</div>
 
-<header>
-  <div id="banner">
-    <img id="logo" src="../images/banner.png">
-  <div> 
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">View</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Ignoring URLs</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+</div>
 
-</header>
-  
+
+<div id="London" class="tabcontent">
+  <p>Choose how you'd like to </p> 
+</div>
+
+
+
+<div id="Paris" class="tabcontent">
+  <p>updateR is disabled for the domains listed below.</p>
+   <br>
+  <input type="text" style="width:400px"> &nbsp&nbsp&nbsp<input type="submit" value="Add URL">
+  <br><br>
+  <select size="20" multiple style="width: 405px; background: white; overflow: hidden; padding: 0px;"></select>&nbsp&nbsp&nbsp<input type="submit" value="Remove">
+</div>
+
+
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>  
 
 </body>
 </html>
