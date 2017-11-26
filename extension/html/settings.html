@@ -57,6 +57,11 @@ div.tab button.active {
 }
 </style>
 </head>
+
+<body>
+
+<script src="../js/scripts.js"></script>
+
 <br><br>
 <div class="header">
   <img src="../images/updtlogo.png" alt="logo">
@@ -64,11 +69,12 @@ div.tab button.active {
 </div>
 
 <div class="tab">
-  <button class="tablinks" onclick="openTab(event, 'London')">View</button>
-  <button class="tablinks" onclick="openTab(event, 'Paris')">Ignoring URLs</button>
-  <button class="tablinks" onclick="openTab(event, 'Tokyo')">Tokyo</button>
+  <button class="tablinks" id="view">View</button>
+  <button class="tablinks" id="urls">URLs Manager</button>
+  <button class="tablinks" id="third">Tokyo</button>
 </div>
 
+<!-- onclick="openTab(event, 'Tokyo')" -->
 
 <div id="London" class="tabcontent">
   <p>Choose how you'd like to </p> 
@@ -91,21 +97,7 @@ div.tab button.active {
   <p>Tokyo is the capital of Japan.</p>
 </div>
 
-<script>
-function openTab(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-</script>  
+
 
 </body>
 </html>
