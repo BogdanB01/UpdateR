@@ -1,6 +1,3 @@
-// Copyright (c) 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
 
 /**
  * Get the current URL.
@@ -114,6 +111,29 @@ document.addEventListener('DOMContentLoaded', () => {
         changeBackgroundColor(savedColor);
         dropdown.value = savedColor;
       }
+    });
+
+
+    document.getElementById('menu').addEventListener("click", function(e){
+      
+      if(e.target.id == 'enabled'){
+        var enabled_no = document.getElementById('enabled-no');
+        var enabled_yes = document.getElementById('enabled-yes');
+        var style_enabled_no = window.getComputedStyle(enabled_no);
+        var style_enabled_yes = window.getComputedStyle(enabled_yes);
+
+        if(style_enabled_no.getPropertyValue('display') == 'none') {
+          console.log('application is enabled on this site');
+          enabled_no.style.display = 'block';
+          enabled_yes.style.display = 'none';
+        } else {
+          console.log('appl is  disabled on this site');
+          enabled_no.style.display = 'none';
+          enabled_yes.style.display = 'block';
+        }     
+      }
+      
+
     });
 
     // Ensure the background color is changed and saved when the dropdown

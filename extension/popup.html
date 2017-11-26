@@ -3,11 +3,16 @@
 <html>
 <head>
     <script type="text/javascript" src="popup.js"> </script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
 
     <style>
       body {
-        min-width: 250px;
-        min-height: 350px;
+        min-width: 230px;
+        min-height: 300px;
+        font-family: 'Montserrat', sans-serif;
+        font-size:13px;
+
       }
       #logo{
         display: block;
@@ -15,15 +20,109 @@
         top: 15px;
         margin: 0px auto;
       }
+
+      #slogan {
+      	text-align: center;
+      	padding: 10px 0px;
+      	color: #d3393b;
+
+      }
+      ul {
+        margin: 0px;
+        padding: 0px;
+      }
+      li{
+        cursor: pointer;
+        list-style-type: none;
+        white-space: nowrap;
+        border-top: 1px solid #E0E0E0;
+        display: list-item;
+        text-align: center;
+      }
+      #wrapper {
+        padding: 20px 0px;
+      }
+      .menu-item{
+        padding: 10px 0px 10px 4px;
+      }
+      .menu-item:hover{
+        background-color: #ddd
+      }
+      .image{
+        display: inline-block; 
+        vertical-align: middle;
+      }
+	
+	   ul li:last-child {
+        padding-top:10px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #E0E0E0;
+      }
+      #U {
+      	font-family: verdana;
+      	text-align: center;
+      	font-size: 15px;
+      	color: #262626;
+      	text-transform: uppercase;
+      	background-image: linear-gradient(to right, #f00, #ff0, #0ff, #0f0, #00f);
+      	-webkit-background-clip: text;
+      	animation: animate 2s linear infinite;
+      	background-size: 1000%;
+      }
+
+      @keyframes animate {
+      	0%
+      	{
+      		background-position: 0% 100%;
+      	}
+      	
+      	50%
+      	{
+      		background-position: 100% 0%;
+      	}
+
+      	100%
+      	{
+      		background-position: 0% 100%;
+      	}
+
+      }
     </style>
 </head>
 
 <header>
   <div id="banner">
-    <img id="logo" src="images/banner.png">
+    <img id="logo" src="images/banner2.png">
   <div>
+
+  <p id="slogan"> <strong>Stay updated </strong></p>
+
+  <div id="wrapper">
+    <ul id="menu">
+
+    	<li id="enabled" class="menu-item">
+    		Enabled on this site
+    	</li>
+
+    	<li id="changes-yes" class="menu-item">
+    		View changes since last visit
+    	</li>
+
+     	<li id="settings">
+          <div class="image">
+          	<img src="images/settings.png" height="19" width="19">
+          </div>
+        <a target="_blank" href="html/settings.html">Settings</a>    
+      </li>
+  
+    </ul>
+  </div>
+
+  <div id="U">
+  	U
+  </div>
+
 </header>
   
-
 </body>
 </html>
