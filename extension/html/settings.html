@@ -2,10 +2,15 @@
 
 <html>
 <head>
+ <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
 <style>
+
 body {
-  font-family: "Lato", sans-serif;
-  background: #F8F8F8}
+  margin: 30px;
+  background: #ECEAE3;
+  font-family: 'Muli', Serif;
+}
 
 /* Style the tab */
 div.tab {
@@ -43,18 +48,96 @@ div.tab button.active {
     border: 1px solid #ccc;
     border-top: none;
 }
-.header img {
-  float: left;
-  width: 50px;
-  height: 54px;
-  background: #555;
-}
 
 .header h1 {
   position: relative;
   top: 18px;
   left: 10px;
 }
+
+#image-wrapper{
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.infobox{
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 14px;
+  color: #323232;
+  width: 650px;
+  height: auto;
+  margin: auto;
+  padding: 10px;
+  background-color: #c5c5c5;
+  border: 1px solid #f5f5f5;
+  border-radius: 15px;
+  -webkit-box-shadow:  0px 0px 10px 0px #f5f5f5;
+  box-shadow:  0px 0px 10px 0px #f5f5f5;
+}
+
+
+#radio-group{
+  float:left;
+  width: 20%;
+  overflow: hidden;
+}
+
+#image-wrapper{
+  overflow: hidden;
+}
+
+#capital-u {
+  color: white;
+  display: inline-block;
+  border-radius: 70%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background: red;
+  font-weight: 900;
+  font-size: 1em;
+}
+#left {
+  float: left;
+  width: 40%;
+  overflow: hidden;
+}
+#right {
+  overflow: hidden;
+}
+
+#updated-text {
+  background-color:red;
+}
+.moqimg {
+  float:right;
+}
+
+#updated-image {
+  padding: 2px;
+  background-color: red;
+}
+
+
+#choose-button {
+  background-color: transparent;
+  font-size: 1.25em;
+  font-family: 'Ubuntu Mono', monospace;
+  border-radius: 20px;
+  border-color: #f44336;
+  padding: 7px;
+  transition: all 0.3s ease 0s;
+}
+
+#choose-button:hover {
+  background-color: #f44336;
+}
+
+
+
+
 </style>
 </head>
 
@@ -63,39 +146,45 @@ div.tab button.active {
 <script src="../js/scripts.js"></script>
 
 <br><br>
-<div class="header">
-  <img src="../images/updtlogo.png" alt="logo">
-  <h1><b>updateR Options</b></h1>
-</div>
 
+<h1> <div id="capital-u"> u</div>pdater  </h1>
 <div class="tab">
   <button class="tablinks" id="view">View</button>
   <button class="tablinks" id="urls">URLs Manager</button>
-  <button class="tablinks" id="third">Tokyo</button>
+  <button class="tablinks" id="third">History</button>
 </div>
 
 
 <div id="view-tab" class="tabcontent">
-  <p> Appearence </p> 
+  
+  <div class="content">
+    <h2> Choose how you want to see updates </h2>
+    
+    <div class="infobox">
+    <h2>Sample web page</h2>
+
+      <p> 
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque leo in mauris elementum, ut placerat neque maximus. Mauris accumsan, lectus luctus sagittis 
+        <img class="moqimg" src="../images/placeholder.png" width="50" height="50">
+        tristique, orci turpis bibendum leo, et dignissim tortor odio id lacus. Morbi commodo ante non accumsan cursus. Sed volutpat maximus pellentesque.
+        <span id="updated-text"> Fusce eu lacinia neque. Nulla vulputate, tellus id viverra bibendum, nisl nisi feugiat ligula, ac tempor elit enim eu lacus. In egestas leo vel nisl consectetur, a commodo nisl rutrum. Mauris sit amet ex nec lectus finibus aliquam. </span>
+      </p>
+
+      <p>
+        Cras et lorem ut sapien varius ultricies. Aliquam sem turpis, mattis eget diam a, congue facilisis ex. Vestibulum sagittis iaculis diam eget molestie. Sed vel massa a purus commodo eleifend eu non nisi.
+        <img id="updated-image" class="moqimg" src="../images/placeholder.png" width="50" height="50">
+        Fusce consequat libero sed efficitur aliquam. Sed condimentum mattis mattis. Proin eu velit eu metus egestas varius et vitae ligula. <span id="updated-text">Aliquam erat volutpat. Vestibulum fermentum libero eu fermentum feugiat. Praesent facilisis sem mauris. Nunc mollis aliquet dui eu congue </span>. Nullam id volutpat risus, eget euismod nunc. Mauris posuere ante ut ex fermentum, in ornare odio vehicula. Nullam vehicula lacus leo. Mauris ut venenatis erat. In bibendum mauris at elementum porta.
+      </p>
+    
+    </div>
+    <br> <br>
+    <div style="text-align: center">
+      <input type="color" value="red">
+      <button id="choose-button">Choose</button>
+    </div>
+    
+  </div>
 </div>
-
-
-
-<div id="urls-tab" class="tabcontent">
-  <p>updateR is disabled for the domains listed below.</p>
-   <br>
-  <input type="text" style="width:400px"> &nbsp&nbsp&nbsp<input type="submit" value="Add URL">
-  <br><br>
-  <select size="20" multiple style="width: 405px; background: white; overflow: hidden; padding: 0px;"></select>&nbsp&nbsp&nbsp<input type="submit" value="Remove">
-</div>
-
-
-
-<div id="another-tab" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
-
 
 
 </body>
