@@ -323,4 +323,6 @@ p > button:hover {
   /* set max-height to a higher value if you want large accordions */
   /* alternatively we could just do fixed-height, but dat's ugly yo */
 }
-
+td {
+  text-align: center;
+}
