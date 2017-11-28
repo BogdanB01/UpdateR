@@ -12,16 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.getElementById(id).style.display = "block";
     }
-
+    
     openTab('view-tab');
 
     document.getElementById('urls').addEventListener('click', function(){
         openTab('urls-tab');
+        document.getElementById('urls').className += " active"
     });
     document.getElementById('view').addEventListener('click', function(){
         openTab('view-tab');
+        document.getElementById('view').className += " active"
     });
     document.getElementById('third').addEventListener('click', function(){
         openTab('another-tab');
+        document.getElementById('third').className += " active"
     });
 });
