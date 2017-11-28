@@ -121,4 +121,37 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('error-url').innerHTML = 'Invalid url';
         }     
     });
+
+    function updateViewColors(color){
+        var ups = document.querySelectorAll('.updated-text');
+        for(var i = 0; i < ups.length; i++){
+            ups[i].style.backgroundColor = color;
+        }
+        console.log(color);
+        document.querySelector('#updated-image').style.background = color;
+    }
+
+    function setColor(){
+        chrome.storage.sync.get("color", function(data){
+            if(!chrome.runtime.error){
+                updateViewColors(data.color);
+                document.querySelector('#color-picker').value=data.color;
+            }
+        });
+    }
+    setColor();
+
+    document.getElementById('color-picker').addEventListener('change', function(){
+        var color = document.querySelector('#color-picker').value;
+        updateViewColors(color);
+    });
+
+
+
+    document.getElementById('choose-button').addEventListener('click', function(){
+        var _color = document.querySelector('#color-picker').value;
+        chrome.storage.sync.set({"color": _color}, function(){
+            console.log('saved color');
+        });
+    });
 });

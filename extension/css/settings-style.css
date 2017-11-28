@@ -100,7 +100,7 @@ div.tab button.active {
   overflow: hidden;
 }
 
-#updated-text {
+.updated-text {
   background-color:red;
 }
 .moqimg {
