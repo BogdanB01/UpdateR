@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>UpdateR - Scholary Raport</title>
+    <link rel="stylesheet" href="schlarly.css">
+    <link rel="stylesheet" href="http://scholarly.vernacular.io/scholarly.css">
+    <script src="node_modules/prismjs/prism.js" defer></script>
+  </head>
+  <body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+    <header>
+      <p class="title">UpdateR - Scholary Raport</p>
+    </header>
+    <article id="what" typeof="schema:ScholarlyArticle" resource="#">
+      <h1>UpdateR</h1>
+      <section>
+        <ol>
+          <li property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://github.com/BogdanB01" typeof="schema:Person">
+              <span property="schema:givenName">Boca</span>
+              <span property="schema:familyName">Ioan Bogdan</span>
+            </a>
+            <a href="#scienceai" property="sa:roleAffiliation" resource="http://science.ai/"></a>
+            <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+            </sup>
+          </li>
+          <li property="schema:contributor" typeof="sa:ContributorRole">
+            <a property="schema:contributor" href="https://github.com/mariusolaru" typeof="schema:Person">
+              <span property="schema:givenName">Olaru</span>
+              <span property="schema:familyName">Marius George</span>
+            </a>
+          </li>
+        </ol>
+        <ol>
+            <a href="https://www.info.uaic.ro/bin/Main/">
+              <span property="schema:name">Facultatea de Informatica Iasi , Universitatea Alexandru Ioan Cuza</span>
+            </a>
+        </ol>
+      </section>
+
+      <section typeof="sa:Abstract" id="abstract">
+        <h2>Cuprins</h2>
+        <p>1.Descriere</p>
+        <p>2.Idei/Concepte privind designul general</p>
+        <p>3.Maniera de interactiune cu utilizatorul</p>
+        <p>4.Detalii referitoare la modelul datelor</p>
+        <p>5.Code management</p>
+        <p>6.Bibliografie </p>
+      </section>
+      <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2>Descriere</h2>
+        <aside typeof="schema:WPSideBar">
+          <p>
+            Se doreşte realizarea unui instrument Web (i.e. o extensie de navigator Web) care permite indicarea schimbărilor ce au survenit în cadrul unei pagini Web faţă de vizita precedentă. Se vor oferi posibilităţi de configurare (e.g., lista URL-urilor care nu vor fi luate în consideraţie, modul de redare a zonelor actualizate ale documentului, întreruperea temporară a funcţionalităţii instrumentului etc.), cu suport pentru export/import al datelor de configurare la nivel local sau recurgând la un serviciu de stocare în "nori" precum Dropbox, OneDrive etc.
+          </p>
+
+          <p> 
+            Nevoia de a fi mereu la curent cu ultimile noutati este ideea din spatele acestui proiect. Folosind aceasta extensie, vei fi primul dintre colegii tai care va afla notele postate de profesori. Astfel, vei putea posta pe grupul de Facebook pentru a primi cat mai multe like-uri.
+          </p>
+           
+        </aside>
+      
+      <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2>Idei/Concepte privind designul general si Maniera de interactiune cu utiliatorul</h2>
+        <aside typeof="schema:WPSideBar">
+          <p>
+            Partea grafica a extensiei este formata din 2 parti. 
+            <ul>
+              <li> 
+                Componenta de tip dropdown.
+              </li>
+
+              <li>
+                Pagina de setari.
+              </li>
+            </ul>
+
+            <p>   
+              <strong> Componenta de tip dropdown </strong> se va deschide atunci cand utilizatorul va apasa pe butonul din browser. 
+            </p>
+            <center>
+              <img src="./images/popup_image.png"> 
+            </center>
+            <p>
+              In cazul in care va aparea o schimbare intr-o pagina vizata, acest lucru va fi semnalat catre utilizator prin o schimbare in imaginea default.
+            </p>
+            <center>
+              <img src="./images/popup_image_notif.png">
+            </center>
+            <p>
+              Prin apasarea pe imaginea respectiva se va deschide un meniu ce ii va oferi utilizatorului informatii si diverse posibilitati.
+            </p> 
+            
+            <center>
+              <img src="./images/dropdown.png">
+            </center>
+            <p>
+              In cazul in care utilizatorul are adaugat in lista de urmarire site-ul curent, atunci acesta va vedea mesajul "Enabled on this site". In caz contrar, i se va afisa mesajul "Disabled on this site". 
+            </p>
+            <p>
+              In cazul in care site-ul a suferit modificari de la ultima vizita a utilizatorului, acesta va vedea mesajul "View changes since last visit". Prin apasarea unui click pe acest mesaj, pagina va suferi modificari pentru a se evidentia cele mai recente noutati. (Mai multe despre acest subiect la prezentarea componentei de optiuni.)
+            </p>
+            <p>
+              De asemenea, utilizatorul va avea optiunea de a bloca temporar extensia. Prin apasarea pe mesajul Disable, un select se va deschide si ii va oferi utilizatorului optiunea de a bloca extensia pentru: 10 minute, 1 ora, 1 zi.
+            </p>
+            <p>
+              Prin apasarea pe optiunea Settings, se va deschide o fereastra noua in care vor fi prezentate utilizatorului diverse posibilitati de configurare a aplicatiei.
+            </p>
+
+            <br> <br>
+
+            <p>
+              <strong>Componenta de setari </strong> consta dintr-o pagina HTML, in care utilizatorul va avea diverse optiuni. Aceasta este compusa dintr-un meniu orizontal format din 3 componente : 
+            </p>
+            <ol>
+              <li> View </li>
+              <li> Urls Manager </li>
+              <li> History </li>
+            </ol>
+
+            <center>
+              <img src="./images/horizontal_menu.png">
+            </center>
+
+            <p> Optiunea View : </p>
+            <p> 
+              In aceasta pagina a meniului utiliatorul va putea sa configureze modul de vizualizare al noutatilor. 
+              <br>
+              Acesta va avea la dispozitie un input type color, de unde va putea sa aleaga formatul in care va dori sa vizualizeze cele mai recente update-uri.
+              De asemenea, va avea la dispozitie un mock-up page, unde va previzualiza alegerea facuta.  
+            </p>
+
+            <center>
+              <img src="./images/view.png" width="500" height="250"> 
+            </center>
+
+            <br> <br>
+            <p> Optiunea Urls Manager </p>
+            
+            <p> 
+              In aceasta parte a meniului utilizatorul va avea posibilitatea de a selecta de linkuri doreste sa urmareasca. De asemenea, tot aici va avea posibilitatea de a sterge linkuri pe care deja le urmareste.
+
+              <br>
+              Linkurile vor fi puse intr-un tabel iar avand 3 coloane:
+              <ol>
+                <li> Url</li>
+                <li> Start-Date - reprezentand data de la care url-ul este urmarit </li>
+                <li> Remove - prin apasarea pe aceasta optiune, link-ul nu va mai fi urmarit</li>
+              </ol>
+
+
+              <center>
+               <img src="./images/url-manager.png" width="500" height="250"> 
+              </center>
+             
+            </p>  
+
+            <br> <br>
+            <p>
+              Optiunea History. <br>
+              Dand click pe aceasta optiune, utilizatorul va putea vedea istoricul urmaririlor sale, si pentru fiecare site urmarit va putea sa observe modificarile petrecute in timp. Fiecare modificare va fi insotita de catre un printscreen al paginii la momentul respectiv pentru a se evidenta cat mai clar diferenta intre diverse versiuni ale paginii.
+
+              Datele sub structurate sub forma unei liste de liste. (O lista cu url-urile urmarite, si respectiv fiecare element al listei va avea o lista cu ultimile 5 modificari). Atunci cand se va apasa click pe o modificare, in partea dreapta a paginii, va aparea printscreen-ul cu starea paginii web la momentul respectiv.
+              <center>
+               <img src="./images/history.png" width="500" height="250"> 
+              </center>
+            </p>
+          </p>
+        </aside>
+
+        <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2>Modelul datelor</h2>
+        <aside typeof="schema:WPSideBar">
+          <p>
+            Datele vor fi stocate folosing Chrome storage api. Am ales acest mod de stocare deoarece fata de local storage, putem stoca datele sub forma de obiecte, fata de stringuri, executa operatiile de scriere si citire asincron, prin urmare este mai rapid.
+           </p>
+           <p>
+            Se vor salva configurarile utilizatorului, pentru o experienta cat mai placuta. De asemenea la fiecare update al unei pagini se va salva un screenshot cu starea paginii dupa update si codul html al paginii, pentru a se vedea evolutia unei pagini in timp.
+           </p>
+        </aside>
+        </section>
+      
+      <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2> Code management </h2>
+        <aside typeof="schema:WPSideBar">
+          <p> Codul sursa al aplicatiei este disponibil la adresa <a href="https://github.com/BogdanB01/UpdateR"> aceasta </a>
+          </p>
+
+          <h3> Formatul commiturilor </h3>
+          <ul>  
+            <li> Commituril sunt de preferat cat mai atomice. </li>
+            <li> Fiecare commit incapsuleaza o modificare punctuala. </li>
+            <li> Mesajul commiturilor este la timpul trecut. </li>
+            <li> Mesajul commiturilor trebuie sa fie pe cat posibil mai scurt </li>
+          </ul>
+
+          <h3> Modul general de a contribui </h3>
+          <ul>
+            <li> Se adauga un task, descrierea lui, responsabilul (sau responsabilii) de solutionarea taskului pe trello. </li>
+            <li> Unde sunt intrebari sau nelamuriri de discuta. </li>
+            <li> Fiecare are cate un fork al repo-ului principal.  </li>
+            <li> Modificarile facute sunt urcate pe repo-ul secundar si se da pull request catre repo-ul principal.</li>
+            <li> Modificarile sunt analizate, si daca totul este in regula se face merge. </li>
+            
+          </ul>
+          
+
+        </aside>
+      </section>  
+  </body>
+</html>
