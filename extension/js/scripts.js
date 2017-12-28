@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+
+    var cs = new ChromeStore();
+    cs.init(1024 * 1024 * 1024);
+
     function openTab(id){
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -45,11 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    function getDirnameFromUrl(url) {
+        return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
+    }
+
     function deleteRowFromTable(row){
         row.parentNode.removeChild(row);       
-        console.log(row);
         var url = row.getElementsByTagName('td')[0].innerText;
-        
+
         chrome.storage.sync.get({list:[]}, function(data){
             if(!chrome.runtime.error){
                 for(var i in data.list){
@@ -63,6 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('removed from list');
             });
             }
+        });
+
+        //delete directory with all its content
+        cs.deleteDir('screenshots/'+getDirnameFromUrl(url), {recursive: true}, function() {
+            console.log('deleted directory');
         });
     }
 
@@ -80,9 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
     populateTable();
 
 
+    function checkIfUrlIsFollowed(url) {
+        return new Promise((resolve, reject) => {
+            chrome.storage.sync.get({list: []}, function(data){
+                for(var i = 0; i < data.list.length; i++){
+                    if(data.list[i].url == url) {
+                        resolve(true);
+                    }
+                }
+                resolve(false);
+            });
+        });
+    }
+
     document.getElementById('addbutton').addEventListener('click', function(){
         var entry = document.getElementById('new-task');
         
+
         var regex = RegExp('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})');
         if (entry.value.match(regex)){
             //add in table 
@@ -100,21 +127,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 time: datetime
             };
             
-            chrome.storage.sync.get({list: []}, function(data){
-                if(!chrome.runtime.error){
-                    data.list.push(row);
+            checkIfUrlIsFollowed(row.url).then(function(result) {
+                if(result == false) { 
+                    chrome.storage.sync.get({list: []}, function(data){
+                        if(!chrome.runtime.error){
+                            data.list.push(row);
 
-                    chrome.storage.sync.set({
-                        list:data.list
-                    }, function(){
-                        console.log('added to list');
+                            chrome.storage.sync.set({
+                                list:data.list
+                            }, function(){
+                                 console.log('added to list');
+                             });
+                        }
                     });
 
+                    var dirname = getDirnameFromUrl(row.url);
+                    //create directory to store screenshots
+
+                    cs.getDir('screenshots/'+dirname, {create : true}, function() {
+                        console.log('Created dir', dirname);
+                    });
+
+
+                    cs.ls('screenshots', function(arr) {
+                        for(var i = 0; i < arr.length; i++)
+                            console.log(arr[i].name);
+                    });
+
+                    addRowInTable(row);
+                } else {
+                    document.getElementById('error-url').innerHTML = "You're already following this url!";
                 }
             });
-
-            addRowInTable(row);
-
         } else {
             //scream
             console.log('do something');

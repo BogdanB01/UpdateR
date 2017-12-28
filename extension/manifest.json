@@ -4,15 +4,28 @@
   "name": "UpdateR",
   "description": "This extension allows the user to view differences between two versions of the same web page.",
   "version": "1.0",
-
-  "content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'",
-
+  "options_page" : "html/settings.html",
   "browser_action": {
     "default_icon": "images/icon.png",
     "default_popup": "popup.html"
   },
+
   "permissions": [
+    "tabs",
+    "https://*/*",
+    "unlimitedStorage",
+    "storage",
     "activeTab",
-    "storage"
+    "<all_urls>"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": ["js/background.js"]
+  },
+  "content_scripts" : [
+    {
+      "matches" : ["<all_urls>"],
+      "js": ["js/content-script.js"]
+    }
   ]
 }
