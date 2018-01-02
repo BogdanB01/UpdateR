@@ -12,6 +12,7 @@
 <script src="../js/chromestore.js"></script>
 <script src="../js/scripts.js"></script>
 <script src="../js/history.js"></script>
+<script src="../js/import-export.js"> </script>
 <br><br>
 
 <h1> <div id="capital-u"> u</div>pdater  </h1>
@@ -19,6 +20,7 @@
   <button class="tablinks" id="view">View</button>
   <button class="tablinks" id="urls">URLs Manager</button>
   <button class="tablinks" id="third">History</button>
+  <button class="tablinks" id="export"> Import/Export settings </button>
 </div>
 
 
@@ -79,7 +81,6 @@
 </div>
 
 
-
 <div id="another-tab" class="tabcontent">
   <h2>History</h2>
   
@@ -138,6 +139,22 @@
   </div>
 
 </div>
+
+<div id="import-export" class="tabcontent">
+
+  <h2> Import/Export settings </h2>
+
+  <div id="droppable"> 
+      Drop file here or click to upload settings 
+  </div>
+  <input type="file" name="settings-file" id="input-file" accept=".json">
+  <output id="drop-error"> </output>
+
+  <div>
+    <button id="export-settings"> Export </button>
+  </div>
+</div>
+
 
 
 

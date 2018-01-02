@@ -326,3 +326,27 @@ p > button:hover {
 td {
   text-align: center;
 }
+
+#droppable {
+  display: block;
+  margin-top: 30px;
+
+  min-height: 170px;
+  width: 520px;
+  margin: 0 auto;
+  border: 2px dotted #9e9e9e;
+  background: #efefef;
+  position: relative;
+  display: inline-block;;
+  box-sizing: border-box;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 150px;
+  color: blue;
+  cursor: pointer;
+}
+
+#input-file {
+  display: none;
+}
+

@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('third').className += " active"
     });
 
+    document.getElementById('export').addEventListener('click', function(){
+        openTab('import-export');  
+        document.getElementById('export').className += " active";
+    });
+
     function addRowInTable(tableRow){
         var table = document.getElementById('my-table');
         var row = table.insertRow(1);
