@@ -214,11 +214,13 @@ var ChromeStore = (function(fileSchema) {
 
             path [string]: path to file in wich to delete
         */
-        deleteFile: function(path) {
+        deleteFile: function(path, callback) {
             fs.root.getFile(path, {create: false}, function(fileEntry) {
 
                 fileEntry.remove(function() {
-                
+                    if(callback) {
+                        callback();
+                    }
                 }, errorHandler);
 
             }, errorHandler);
@@ -276,6 +278,25 @@ var ChromeStore = (function(fileSchema) {
             return fw;
         },
 
+        /*
+            Create new FileReader object and returns it to the caller
+        */
+        
+        createReader: function() {
+            var fr = new _FileReader(fs);
+            return fr;
+        },
+
+        readFile: function(path, callback) {
+            var fr = this.createReader();
+            fr.readData(path, callback).then(function(result) {
+                if(callback) {
+                    callback(result);
+                }
+            });
+        },
+
+    
         /*
             Write to a file
             If file does not exist, createFlag must be set to True
@@ -388,6 +409,41 @@ var ChromeStore = (function(fileSchema) {
     };
 
 });
+
+
+/*
+    FileReader Object
+    method: readData
+*/
+
+var _FileReader = (function(filesystem) {
+    var fs = filesystem;
+
+    function errorHandler(DOMError) {
+        console.log(DOMError);
+    }
+
+    return {
+        readData: function(path, callback) {
+            return new Promise((resolve, rejet) => {
+                fs.root.getFile(path, {}, function(fileEntry) {
+
+                    fileEntry.file(function(file) {
+
+                        var reader = new FileReader();
+
+                        reader.onloadend = function(e) {
+                            resolve(this.result);
+                        }
+
+                        reader.readAsText(file);
+                    });
+                }, errorHandler);
+            });
+        }
+    }
+});
+
 
 /*
     FileWriter Object
