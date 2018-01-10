@@ -20,7 +20,7 @@
   ],
   "background": {
     "persistent": false,
-    "scripts": ["js/background.js"]
+    "scripts": ["js/chromestore.js" ,"js/background.js"]
   },
   "content_scripts" : [
     {
