@@ -143,7 +143,6 @@ function savePhoto(dirname, image) {
 	isUpdated(dirname, image).then(function(result) {
 
 		if(result == true) {
-			console.log('salvam si imaginea');
 			var fileName = getDate() + '.png';
 
 			cs.getFile('screenshots/' + dirname + '/' + fileName, {create: true, exclusive: true}, function() {
@@ -160,6 +159,24 @@ function savePhoto(dirname, image) {
 	});
 }
 
+
+/**
+*	Checks if the extension in disabled
+*/
+
+function checkIfExtensionIsDisabled() {
+	return new Promise((resolve, reject) => {
+
+		chrome.storage.sync.get('disabled', function(data) {
+
+			if (data.disabled == 'not-disabled') {
+				resolve(false);
+			} else {
+				resolve(true);
+			}
+		});
+	});
+}
 
 var takeScreenshot = {
 	
@@ -183,6 +200,10 @@ var takeScreenshot = {
 		scrollTop: 0
 	},
 
+	/**
+	*	Initializes variables
+	*/ 
+
 	initialize: function () {
 		this.screenshotCanvas = document.createElement("canvas");
 		this.screenshotContext = this.screenshotCanvas.getContext("2d");
@@ -190,6 +211,9 @@ var takeScreenshot = {
 		this.bindEvents();
 	},
 
+	/**
+	*	Binds events
+	*/
 	bindEvents: function () {
 
 		chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
@@ -199,17 +223,28 @@ var takeScreenshot = {
 			this.tabId = tabId;
 			this.dirname = getDirnameFromUrl(tab.url);
 
-			checkIfUrlIsFollowed().then(function(result){
-				if(result == true) {
-					chrome.tabs.sendMessage(tabId, {
-						"msg" : "getPageDetails"
+			checkIfExtensionIsDisabled().then(function(result1) {
+
+				if(result1 == false) {
+
+					console.log('extensia nu e oprita');
+				
+					checkIfUrlIsFollowed().then(function(result){
+
+						if(result == true) {
+							chrome.tabs.sendMessage(tabId, {
+								"msg" : "getPageDetails"
+							});
+							console.log('facem screenshot');
+						} else {
+							console.log('nu facem screenshot!');
+						}
 					});
-				} else {
-					console.log('nu facem screenshot!');
+				}
+				else {
+					console.log('extensia e oprita, nu facem nimic');
 				}
 			});
-
-			
 
 		}.bind(this));
 
@@ -232,6 +267,9 @@ var takeScreenshot = {
 		}.bind(this));
 	},
 
+	/**
+	*	Sends request to scroll page on given position
+	*/	
 	scrollTo: function (position) {
 		chrome.tabs.sendMessage(this.tabId, {
 			"msg": "scrollPage",
@@ -240,6 +278,11 @@ var takeScreenshot = {
 			"scrollTo": position
 		});
 	},
+
+	/**
+	* Takes screenshot of visible area and merges it
+	* @param: position - 
+	*/
 
 	capturePage: function (position, lastCapture) {
 		var self = this;
@@ -274,9 +317,10 @@ var takeScreenshot = {
 			});
 		}, 50);
 	},
-
+	/**
+	*	Send request to set original params of the page
+	*/
 	resetPage: function () {
-		console.log('reset');
 		chrome.tabs.sendMessage(this.tabId, {
 			"msg": "resetPage",
 			"originalParams": this.originalParams

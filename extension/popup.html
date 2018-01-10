@@ -40,6 +40,7 @@
         text-align: center;
       }
       #wrapper {
+        display: block;
         padding: 20px 0px;
       }
       .menu-item{
@@ -53,40 +54,51 @@
         vertical-align: middle;
       }
 	
-	   ul li:last-child {
+	    ul li:last-child {
         padding-top:10px;
         padding-bottom: 8px;
         border-bottom: 1px solid #E0E0E0;
       }
-      #U {
-      	font-family: verdana;
-      	text-align: center;
-      	font-size: 15px;
-      	color: #262626;
-      	text-transform: uppercase;
-      	background-image: linear-gradient(to right, #f00, #ff0, #0ff, #0f0, #00f);
-      	-webkit-background-clip: text;
-      	animation: animate 2s linear infinite;
-      	background-size: 1000%;
+    
+      #changes-yes {
+        display: none;
+        background-color: #ad3452;
       }
 
-      @keyframes animate {
-      	0%
-      	{
-      		background-position: 0% 100%;
-      	}
-      	
-      	50%
-      	{
-      		background-position: 100% 0%;
-      	}
-
-      	100%
-      	{
-      		background-position: 0% 100%;
-      	}
-
+      #disabled-extension {
+        display:none;
       }
+
+      .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+      }
+
+      .button3 {
+        background-color: white; 
+        color: black; 
+        border: 2px solid #f44336;
+      }
+
+      .button3:hover {
+        background-color: #f44336;
+        color: white;
+      }
+      .center {
+        display: inline-block;
+        text-align: center;
+      }
+
     </style>
 </head>
 
@@ -100,22 +112,20 @@
   <div id="wrapper">
     <ul id="menu">
 
-    	<li id="enabled" class="menu-item">
-    		Enabled on this site
-    	</li>
-
+    
     	<li id="changes-yes" class="menu-item">
     		View changes since last visit
     	</li>
 
-      <li>
+      <li class="menu-item">
         Disable for: 
-        <select> 
-          <option disabled selected value> --select-- </option>
-          <option value="10-min"> 10 min </option>
-          <option value="1-hour"> 1 hour </option>
-          <option value="1-day"> 1 day </option>
+        <select id="disable-select">
+          <option> Select an option </option>
+          <option value='10-minutes'> 10 minutes </option>
+          <option value='1-hour'> 1 hour </option>
+          <option value='1-day'> 1 day </option>
         </select>
+        
       </li>
      	<li id="settings">
           <div class="image">
@@ -125,6 +135,19 @@
       </li>
   
     </ul>
+  </div>
+
+  <div id="disabled-extension">
+    
+    <div class="menu-item">
+       Extension is disabled untill : <br>
+       <strong> <span id="time-untill"> </span> </strong>
+    </div>
+
+    <!--<button id="stop-disabled"> Enable now </button> -->
+    <div id="center">
+      <button id="stop-disabled" class="button button3">Enable now</button>
+    </div>
   </div>
 
 
