@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
+	var button = document.getElementById('button-input');
+
+	button.addEventListener('change',function(){
+		console.log("Linia 7: Compare a fost schimbat");
+	});
+
 	function getDirnameFromUrl(url) {
         return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
     }
@@ -11,65 +18,92 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				var rootElement = document.getElementById("historylist");
 
-				for(var i = 0 ; i < data.list.length ; i++) {
-					var newUl = document.createElement("ul");
-					newUl.setAttribute("class","accordion");
+				for(var foo = 0 ; foo < data.list.length ; foo++) {
 
-					var newInput = document.createElement("input");
-					newInput.setAttribute("id" , "accord" + i);
-					newInput.setAttribute("type" , "checkbox");
-					newInput.setAttribute("class" , "hide");
+					(function(i) {
 
-					var newLi = document.createElement("li");
+						/*var btn = document.createElement("input");
+						btn.setAttribute("type", "button");
+						btn.setAttribute("class" , "btn");
+						btn.setAttribute("id" , foo + "compare");
 
-					var newLabel = document.createElement("label");
-					newLabel.setAttribute("for" , "accord" + i);
-					newLabel.setAttribute("class" , "toggle");
-					newLabel.innerText = data.list[i].url;
+						rootElement.appendChild(btn);
+*/
+						var newUl = document.createElement("ul");
+						newUl.setAttribute("class","accordion");
 
-					newUl.appendChild(newInput);
-					newUl.appendChild(newLi);
-					newLi.appendChild(newLabel);
+						var newInput = document.createElement("input");
+						newInput.setAttribute("id" , "accord" + i);
+						newInput.setAttribute("type" , "checkbox");
+						newInput.setAttribute("class" , "hide");
 
-					rootElement.appendChild(newUl);
+						var newLi = document.createElement("li");
 
-					var newDiv = document.createElement("div");
-					newDiv.setAttribute("class" , "inner");
+						var newLabel = document.createElement("label");
+						newLabel.setAttribute("for" , "accord" + i);
+						newLabel.setAttribute("class" , "toggle");
+						newLabel.innerText = data.list[i].url;
 
-					var anotherUl = document.createElement("ul");
-					anotherUl.setAttribute("class" , "accordion");
+						newUl.appendChild(newInput);
+						newUl.appendChild(newLi);
+						newLi.appendChild(newLabel);
 
-					cs.ls('screenshots/' + getDirnameFromUrl(data.list[i].url) , function(arr){
-    					for(var j = 0 ; j < arr.length; j++){
-    						var anotherInput = document.createElement("input");
-    						anotherInput.setAttribute("id" , "accord" + i + "-" + j);
-    						anotherInput.setAttribute("type" , "checkbox");
-    						anotherInput.setAttribute("class" , "hide");
+						rootElement.appendChild(newUl);
 
-    						var anotherLi = document.createElement("li");
+						var newDiv = document.createElement("div");
+						newDiv.setAttribute("class" , "inner");
 
-    						var anotherLabel = document.createElement("label");
-    						anotherLabel.setAttribute("for" , "accord" + i + "-" + j);
-    						anotherLabel.setAttribute("class" , "toggle");
-    						anotherLabel.innerText = arr[j].name;
+						var anotherUl = document.createElement("ul");
+						anotherUl.setAttribute("class" , "accordion");
 
-    						anotherUl.appendChild(anotherInput);
-    						anotherLi.appendChild(anotherLabel);
+						cs.ls('screenshots/' + getDirnameFromUrl(data.list[i].url) , function(arr){
 
-    						anotherUl.appendChild(anotherLi);
-    					}
+	    					for(var j = 0 ; j < arr.length; j++){
 
-  						newDiv.appendChild(anotherUl);
-  						newLi.appendChild(newDiv);
+	    						var anotherInput = document.createElement("input");
+	    						anotherInput.setAttribute("id" , "accord" + i + "-" + j);
+	    						anotherInput.setAttribute("type" , "checkbox");
+	    						anotherInput.setAttribute("class" , "hide");
 
-					});
+	    						var anotherLi = document.createElement("li");
+
+	    						var anotherLabel = document.createElement("label");
+	    						anotherLabel.setAttribute("for" , "accord" + i + "-" + j);
+	    						anotherLabel.setAttribute("class" , "toggle");
+	    						anotherLabel.setAttribute("id" , i + "-" + j);
+	    						anotherLabel.className += " numefisier";
+
+	    						anotherLabel.innerText = arr[j].name;
+
+	    						anotherUl.appendChild(anotherInput);
+	    						anotherLi.appendChild(anotherLabel);
+
+	    						anotherUl.appendChild(anotherLi);
+
+	    					}
+
+	  						newDiv.appendChild(anotherUl);
+	  						newLi.appendChild(newDiv);
+
+						});
+
+					}(foo));
 
 				}
+
 			}
+
 		});
+
 	}
 
 	var cs = new ChromeStore();
 	cs.init(1024 * 1024 * 1024 , populateHistoryTab);
+
+	function changePhoto(){
+
+		console.log("Am ajuns aici");
+
+	}
 
 });
