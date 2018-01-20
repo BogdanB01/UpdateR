@@ -4,12 +4,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	var button = document.getElementById('button-input');
 
 	button.addEventListener('change',function(){
-		console.log("Linia 7: Compare a fost schimbat");
+
+		if(!button.checked){
+
+			var elements = document.getElementsByClassName('toggle-focused');
+
+			while (elements[0]) 
+			{
+    			elements[0].classList.remove('toggle-focused');
+  			}
+
+  			ids = [];
+
+		}
+
 	});
 
 	function getDirnameFromUrl(url) {
         return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
     }
+
+    var ids = [];
 
 	function populateHistoryTab(){
 
@@ -22,13 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					(function(i) {
 
-						/*var btn = document.createElement("input");
-						btn.setAttribute("type", "button");
-						btn.setAttribute("class" , "btn");
-						btn.setAttribute("id" , foo + "compare");
-
-						rootElement.appendChild(btn);
-*/
 						var newUl = document.createElement("ul");
 						newUl.setAttribute("class","accordion");
 
@@ -80,6 +88,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	    						anotherUl.appendChild(anotherLi);
 
+	    						anotherLabel.addEventListener("click" , function(){
+
+	    							if ( ! button.checked ){
+
+		    							document.getElementById('mockup').src='../images/placeholder_test.png';
+
+		    						}
+
+		    						else {
+
+	    								document.getElementById('mockup').src='../images/placeholder_test.png';
+	    								document.getElementById(this.id).className += " toggle-focused";
+
+	    								if( (ids.length == 1 && this.id == ids[0] ) || 
+	    									(ids.length == 2 && ids[1] == this.id)){	
+
+	    									//same item selected , do nothing
+
+		    							} else {
+
+		    								validatePhotosSelection(this.id);
+		    							}
+		    						}
+		    					});
+
 	    					}
 
 	  						newDiv.appendChild(anotherUl);
@@ -100,9 +133,60 @@ document.addEventListener('DOMContentLoaded', () => {
 	var cs = new ChromeStore();
 	cs.init(1024 * 1024 * 1024 , populateHistoryTab);
 
-	function changePhoto(){
+	document.getElementById("compare-image").addEventListener("click" , function(){
 
-		console.log("Am ajuns aici");
+		if(ids.length < 2){
+			console.log("[Error]Nu se poate incepe compararea");
+		}
+
+		if(ids.length == 2){
+
+			if(ids[0].substring(0,1) != ids[1].substring(0,1)){
+				console.log("[Error]Nu poti compara 2 imagini din linkuri diferite");
+
+			} else {
+
+				console.log("Ok , poate incepe compararea");
+
+			}
+		}
+
+	});
+
+	function validatePhotosSelection(current_id){
+
+		if (ids.length == 2) 
+		{
+			document.getElementById(ids[0]).classList.remove("toggle-focused");
+			ids.splice(0,1);
+		}
+
+		if (ids.length == 1 && (ids[0].substring(0,1) == current_id.substring(0,1)))
+		{	
+			ids.push(current_id);
+		}
+
+		if (ids.length == 0) 
+		{	
+			ids.push(current_id);
+		}
+
+		if (ids.length == 1 && (ids[0].substring(0,1) != current_id.substring(0,1)))
+		{	
+			document.getElementById(ids[0]).classList.remove("toggle-focused");
+			ids = [];
+
+			ids.push(current_id);
+		}
+
+		if (ids.length == 2 && (ids[1].substring(0,1) != current_id.substring(0,1)))
+		{	
+			document.getElementById(ids[0]).classList.remove("toggle-focused");
+			document.getElementById(ids[1]).classList.remove("toggle-focused");
+			ids = [];
+
+			ids.push(current_id);
+		}
 
 	}
 
