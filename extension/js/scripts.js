@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     var cs = new ChromeStore();
     cs.init(1024 * 1024 * 1024);
 
+    /**
+    *   Function that changes settings page content 
+    */
+
     function openTab(id){
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -38,6 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('export').className += " active";
     });
 
+    /**
+    *   Function that adds an url in the table (in the followed list). When a link is added a new directory is created 
+    *   in the 'screenshots' directory.
+    */
+
     function addRowInTable(tableRow){
         var table = document.getElementById('my-table');
         var row = table.insertRow(1);
@@ -54,11 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /**
+    *   Function that converts an url in a directory name (escapes special chracters) 
+    */
 
     function getDirnameFromUrl(url) {
         return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
     }
 
+
+    /**
+    *   Function that deletes a row from the table. (Deletes an url from the followed list). When the row is deleted
+    *   the directory created once it was added is now deleted.
+    */
     function deleteRowFromTable(row){
         row.parentNode.removeChild(row);       
         var url = row.getElementsByTagName('td')[0].innerText;
@@ -85,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    /**
+    *   Function that gets data the list of followed urls from chrome storage and populates the table
+    */
+
     function populateTable(){
         chrome.storage.sync.get({list: []}, function(data){
             if(!chrome.runtime.error){
@@ -110,6 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    /**
+    *   Function that is called when an user tries to add a new url in the followed list. If the url that user entered is invalid it will get an error message,
+    *   also, if the url that the user is trying to follow is already being followed an error message will be shown to the user.
+    */
 
     document.getElementById('addbutton').addEventListener('click', function(){
         var entry = document.getElementById('new-task');
@@ -171,6 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }     
     });
 
+    /**
+    *   Function that changes to color of the sample web page with the new color provided by the user.
+    */
+
     function updateViewColors(color){
         var ups = document.querySelectorAll('.updated-text');
         for(var i = 0; i < ups.length; i++){
@@ -179,6 +209,10 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(color);
         document.querySelector('#updated-image').style.background = color;
     }
+
+    /**
+    *   Function that saves in the chrome storage the colour that the user choosed
+    */ 
 
     function setColor(){
         chrome.storage.sync.get("color", function(data){

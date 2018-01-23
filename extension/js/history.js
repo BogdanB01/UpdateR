@@ -12,57 +12,64 @@ document.addEventListener('DOMContentLoaded', () => {
 				var rootElement = document.getElementById("historylist");
 
 				for(var i = 0 ; i < data.list.length ; i++) {
-					var newUl = document.createElement("ul");
-					newUl.setAttribute("class","accordion");
+					
+					(function(foo) {
 
-					var newInput = document.createElement("input");
-					newInput.setAttribute("id" , "accord" + i);
-					newInput.setAttribute("type" , "checkbox");
-					newInput.setAttribute("class" , "hide");
+						var newUl = document.createElement("ul");
+						newUl.setAttribute("class","accordion");
 
-					var newLi = document.createElement("li");
+						var newInput = document.createElement("input");
+						newInput.setAttribute("id" , "accord" + foo);
+						newInput.setAttribute("type" , "checkbox");
+						newInput.setAttribute("class" , "hide");
 
-					var newLabel = document.createElement("label");
-					newLabel.setAttribute("for" , "accord" + i);
-					newLabel.setAttribute("class" , "toggle");
-					newLabel.innerText = data.list[i].url;
+						var newLi = document.createElement("li");
 
-					newUl.appendChild(newInput);
-					newUl.appendChild(newLi);
-					newLi.appendChild(newLabel);
+						var newLabel = document.createElement("label");
+						newLabel.setAttribute("for" , "accord" + foo);
+						newLabel.setAttribute("class" , "toggle");
+						newLabel.innerHTML = data.list[foo].url;
 
-					rootElement.appendChild(newUl);
+						newUl.appendChild(newInput);
+						newUl.appendChild(newLi);
+						newLi.appendChild(newLabel);
 
-					var newDiv = document.createElement("div");
-					newDiv.setAttribute("class" , "inner");
+						rootElement.appendChild(newUl);
 
-					var anotherUl = document.createElement("ul");
-					anotherUl.setAttribute("class" , "accordion");
+						var newDiv = document.createElement("div");
+						newDiv.setAttribute("class" , "inner");
 
-					cs.ls('screenshots/' + getDirnameFromUrl(data.list[i].url) , function(arr){
-    					for(var j = 0 ; j < arr.length; j++){
-    						var anotherInput = document.createElement("input");
-    						anotherInput.setAttribute("id" , "accord" + i + "-" + j);
-    						anotherInput.setAttribute("type" , "checkbox");
-    						anotherInput.setAttribute("class" , "hide");
+						var anotherUl = document.createElement("ul");
+						anotherUl.setAttribute("class" , "accordion");
 
-    						var anotherLi = document.createElement("li");
+						cs.ls('screenshots/' + getDirnameFromUrl(data.list[foo].url) , function(arr){
+	    					console.log(foo);
+	    					for(var j = 0 ; j < arr.length; j++){
+	    						var anotherInput = document.createElement("input");
+	    						anotherInput.setAttribute("id" , "accord" + foo + "-" + j);
+	    						anotherInput.setAttribute("type" , "checkbox");
+	    						anotherInput.setAttribute("class" , "hide");
 
-    						var anotherLabel = document.createElement("label");
-    						anotherLabel.setAttribute("for" , "accord" + i + "-" + j);
-    						anotherLabel.setAttribute("class" , "toggle");
-    						anotherLabel.innerText = arr[j].name;
+	    						var anotherLi = document.createElement("li");
 
-    						anotherUl.appendChild(anotherInput);
-    						anotherLi.appendChild(anotherLabel);
+	    						var anotherLabel = document.createElement("label");
+	    						anotherLabel.setAttribute("for" , "accord" + foo + "-" + j);
+	    						anotherLabel.setAttribute("class" , "toggle");
+	    						anotherLabel.innerHTML = arr[j].name;
 
-    						anotherUl.appendChild(anotherLi);
-    					}
+	    						anotherUl.appendChild(anotherInput);
+	    						anotherLi.appendChild(anotherLabel);
 
-  						newDiv.appendChild(anotherUl);
-  						newLi.appendChild(newDiv);
+	    						anotherUl.appendChild(anotherLi);
+	    					}
 
-					});
+	  						newDiv.appendChild(anotherUl);
+	  						newLi.appendChild(newDiv);
+
+	  						console.log(rootElement);
+
+						}); 
+					}(i));
 
 				}
 			}
