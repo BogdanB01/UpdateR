@@ -1,5 +1,7 @@
 var cs;
 
+var lastPhoto;
+var currentPhoto;
 
 /**
 *	Checks if the page that user is currently on is followed (it's present in url manager table)
@@ -60,12 +62,12 @@ function isUpdated(dirname, image) {
 
 	return new Promise((resolve, reject) => {
 		checkIfFileExists(dirname, 'last.png').then(function(result) {
+
 			if(result == true) {
 
 				//read last.png and see if the photos are the same
 				cs.readFile('screenshots/' + dirname + '/last.png', function(data) {
 					
-
 					//console.log(data);
 
 					if(data == image) {
@@ -82,6 +84,12 @@ function isUpdated(dirname, image) {
 							});
 						});
 						
+
+						lastPhoto = data;
+						currentPhoto = image;
+
+						chrome.browserAction.setBadgeText({text: '!'});
+
 						resolve(true);
 					}
 					
@@ -90,6 +98,8 @@ function isUpdated(dirname, image) {
 
 			} else { 
 				//create last.png image
+
+				console.log('cream last.png');
 				cs.getFile('screenshots/' + dirname + '/last.png', {create: true, exclusive: true}, function() {
 					cs.write('screenshots/' + dirname + '/last.png', 'image/png', image, {create: false});
 				});
@@ -143,14 +153,13 @@ function savePhoto(dirname, image) {
 	isUpdated(dirname, image).then(function(result) {
 
 		if(result == true) {
+			console.log('salvam si imaginea');
 			var fileName = getDate() + '.png';
 
 			cs.getFile('screenshots/' + dirname + '/' + fileName, {create: true, exclusive: true}, function() {
 				console.log('am creat fisierul ' + fileName);
 				cs.write('screenshots/' + dirname + '/' + fileName, 'image/png', image, {create: false});
 			});
-
-			chrome.browserAction.setBadgeText({text: '!'});
 
 		} else {
 			console.log('page is not updated');
@@ -169,7 +178,10 @@ function checkIfExtensionIsDisabled() {
 
 		chrome.storage.sync.get('disabled', function(data) {
 
-			if (data.disabled == 'not-disabled') {
+			console.log(data)
+			var endDate = new Date(data.disabled.endDate);
+			var now = new Date();
+			if (now > endDate) {
 				resolve(false);
 			} else {
 				resolve(true);
