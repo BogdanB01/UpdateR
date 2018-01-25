@@ -82,9 +82,19 @@
 
 
 <div id="another-tab" class="tabcontent">
-  <h2>History</h2>
-  
 
+  <br><br>
+
+  <label style="padding-left: 8px;"><font size="4"><b>Turn ON/OFF Comparing</b></font></label>
+  <label class="switch" id="compare-button">
+    <input id="button-input" type="checkbox" style="float: right;">
+    <span class="slider round"></span>
+  </label>
+
+  <input type="button" class="btn" id="compare-image">
+
+
+  <br><br>
   <div id="left">
 
     <ul id="historylist">
@@ -97,6 +107,13 @@
   <div id="right">
     <div id="image-wrapper"> 
       <img id="mockup" src='../images/placeholder.png' width="400" height="400">
+        <!-- <a class="lightbox" href="#dog" id="image-wrapper">
+          <img src="../images/placeholder.png"/ >
+        </a> 
+ -->        <!-- <div class="lightbox-target" id="dog">
+          <img src="../images/placeholder.png"/>
+          <a class="lightbox-close" href="#"></a>
+       </div> -->
     </div>
   </div>
 
