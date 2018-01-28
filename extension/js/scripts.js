@@ -226,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('color-picker').addEventListener('change', function(){
         var color = document.querySelector('#color-picker').value;
+        console.log("boca");
         updateViewColors(color);
     });
 
@@ -236,5 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chrome.storage.sync.set({"color": _color}, function(){
             console.log('saved color');
         });
+
+        console.log("culorica" + _color);
     });
 });

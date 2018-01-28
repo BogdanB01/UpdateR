@@ -12,6 +12,29 @@ document.addEventListener('DOMContentLoaded', () => {
 	    		try {
 	    			let settings = JSON.parse(contents);
 	    			console.log(settings);
+					
+					Object.keys(settings).forEach(function (key) {
+
+						if(key != 'color' && key != 'links'){
+
+							document.getElementById('drop-error').innerHTML = '<p> Invalid JSON format !</p>';
+
+						}
+
+					});	
+
+					var color = settings.color;
+
+					console.log(color);
+
+					chrome.storage.sync.set({"color": color}, function(){
+			            console.log('saved color');
+
+			            var event = new Event('change');
+			            document.querySelector("#color-picker").dispatchEvent(event);
+
+			        });
+
 	    			
 	    		} catch (error) {
 	    			console.log('invalid json!');
@@ -28,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	function handleFileSelect(evt) {
 	    evt.stopPropagation();
 	    evt.preventDefault();
-
 
 	    var files = evt.dataTransfer.files; // FileList object.
 	    processFile(files[0]);
@@ -61,8 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	document.getElementById('export-settings').addEventListener('click', function() {
 		var element = document.createElement('a');
-		var text = 'heelo my friend';
-		element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text));
+		var obj = { color : "red" , 
+					links : ["link1" , "link2"]}
+
+		element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(obj)));
 
 		element.setAttribute('download', 'settings.json');
 
