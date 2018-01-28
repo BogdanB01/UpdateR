@@ -458,9 +458,10 @@ input:checked + .slider:before {
 }
 /* Modal Content (image) */
 .modal-content{
-  margin: auto;
+  margin: auto; 
+  overflow: auto;
   display: block;
-  height: 97%;
+ /* height: 97%; */
   width: 87%;
   /*max-width: 700px;*/
 }
