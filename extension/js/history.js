@@ -1,5 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+		//Get the modal
+	var modal = document.getElementById('imgModal');
+
+	//Get the image
+	var img = document.getElementById('photo');
+	var modalImg = document.getElementById('img01');
+	var captionText = document.getElementById("caption");
+
+	img.onclick = function(){
+	  modal.style.display = "block";
+	  modalImg.src = this.src;
+	  modalImg.alt = this.alt;
+	  captionText.style.display = "block";
+	}
+
+	var span = document.getElementsByClassName("close")[0];
+
+	//click on (x), close the modal
+	span.onclick = function() { 
+	    modal.style.display = "none";
+	}
+
 	var button = document.getElementById('button-input');
 
 	button.addEventListener('change',function(){
@@ -67,50 +89,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	    					for(var j = 0 ; j < arr.length; j++){
 
-	    						var anotherInput = document.createElement("input");
-	    						anotherInput.setAttribute("id" , "accord" + i + "-" + j);
-	    						anotherInput.setAttribute("type" , "checkbox");
-	    						anotherInput.setAttribute("class" , "hide");
+	    						if(arr[j].name == 'last.png'){
+									
+									continue;  
+	    							
+	    							} else {
 
-	    						var anotherLi = document.createElement("li");
+		    						var anotherInput = document.createElement("input");
+		    						anotherInput.setAttribute("id" , "accord" + i + "-" + j);
+		    						anotherInput.setAttribute("type" , "checkbox");
+		    						anotherInput.setAttribute("class" , "hide");
 
-	    						var anotherLabel = document.createElement("label");
-	    						anotherLabel.setAttribute("for" , "accord" + i + "-" + j);
-	    						anotherLabel.setAttribute("class" , "toggle");
-	    						anotherLabel.setAttribute("id" , i + "-" + j);
-	    						anotherLabel.className += " numefisier";
+		    						var anotherLi = document.createElement("li");
 
-	    						anotherLabel.innerText = arr[j].name;
+		    						var anotherLabel = document.createElement("label");
+		    						anotherLabel.setAttribute("for" , "accord" + i + "-" + j);
+		    						anotherLabel.setAttribute("class" , "toggle");
+		    						anotherLabel.setAttribute("id" , i + "-" + j);
+		    						anotherLabel.className += " numefisier";
 
-	    						anotherUl.appendChild(anotherInput);
-	    						anotherLi.appendChild(anotherLabel);
+		    						anotherLabel.innerText = arr[j].name;
 
-	    						anotherUl.appendChild(anotherLi);
+		    						anotherUl.appendChild(anotherInput);
+		    						anotherLi.appendChild(anotherLabel);
 
-	    						anotherLabel.addEventListener("click" , function(){
+		    						anotherUl.appendChild(anotherLi);
 
-	    							if ( ! button.checked ){
+		    						anotherLabel.addEventListener("click" , function(e){
 
-		    							document.getElementById('mockup').src='../images/placeholder_test.png';
+		    							if ( ! button.checked ){
 
-		    						}
+		    								changePhotoWhenClicked(getDirnameFromUrl(data.list[i].url), e.target.innerText);
 
-		    						else {
+			    						}
 
-	    								document.getElementById('mockup').src='../images/placeholder_test.png';
-	    								document.getElementById(this.id).className += " toggle-focused";
+			    						else {
 
-	    								if( (ids.length == 1 && this.id == ids[0] ) || 
-	    									(ids.length == 2 && ids[1] == this.id)){	
+		    								changePhotoWhenClicked(getDirnameFromUrl(data.list[i].url), e.target.innerText);
+		    								document.getElementById(this.id).className += " toggle-focused";
 
-	    									//same item selected , do nothing
+		    								if( (ids.length == 1 && this.id == ids[0] ) || 
+		    									(ids.length == 2 && ids[1] == this.id)){	
 
-		    							} else {
+		    									//same item selected , do nothing
 
-		    								validatePhotosSelection(this.id);
-		    							}
-		    						}
-		    					});
+			    							} else {
+
+			    								validatePhotosSelection(this.id);
+			    							}
+			    						}
+			    					});
+
+			    				}
 
 	    					}
 
@@ -132,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	var cs = new ChromeStore();
 	cs.init(1024 * 1024 * 1024 , populateHistoryTab);
 
-	document.getElementById("compare-image").addEventListener("click" , function(){
+	document.getElementById("compare-image").addEventListener("click" , function(e){
 
 		if(ids.length < 2){
 			console.log("[Error]Nu se poate incepe compararea");
@@ -145,12 +175,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			} else {
 
-				console.log("Ok , poate incepe compararea");
+				//comparing images
+
+				var firstPhotoName = getPhotoNameById(ids[0]);
+				var secondPhotoName = getPhotoNameById(ids[1]);
+
+				var dirname = getDirnameFromUrl(document.getElementById(ids[0])
+								.parentElement.parentElement.parentElement.parentElement.innerText.split('\n')[0]);
+
+				cs.readFile('screenshots/' + dirname + '/' + firstPhotoName, function(data) {
+
+					cs.readFile('screenshots/' + dirname + '/' + secondPhotoName , function(data2){
+
+						var resembleControl = resemble(data).compareTo(data2).onComplete(function(data3){
+
+							/*document.getElementById('mockup').src = data3.getImageDataUrl();*/
+
+							var newWindow = window.open();
+
+							newWindow.document.write("<style type='text/css'>body {margin: 0;}</style>");
+							newWindow.document.write("<img src='" + data3.getImageDataUrl() + "' />");
+
+						});
+
+					});	
+
+				});
 
 			}
 		}
 
 	});
+
+	function getPhotoNameById(id){
+
+		return document.getElementById(id).innerText;
+
+	}
 
 	function validatePhotosSelection(current_id){
 
@@ -186,6 +247,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			ids.push(current_id);
 		}
+
+	}
+
+	function changePhotoWhenClicked(dirname, filename){
+
+		cs.readFile('screenshots/' + dirname + '/' + filename, function(data) {
+
+			document.getElementById('photo').src = data;
+
+		});
 
 	}
 

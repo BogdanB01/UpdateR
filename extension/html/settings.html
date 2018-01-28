@@ -11,6 +11,7 @@
 
 <script src="../js/chromestore.js"></script>
 <script src="../js/scripts.js"></script>
+<script src="../js/resemble.js"></script>
 <script src="../js/history.js"></script>
 <script src="../js/import-export.js"> </script>
 <br><br>
@@ -106,14 +107,15 @@
 
   <div id="right">
     <div id="image-wrapper"> 
-      <img id="mockup" src='../images/placeholder.png' width="400" height="400">
-        <!-- <a class="lightbox" href="#dog" id="image-wrapper">
-          <img src="../images/placeholder.png"/ >
-        </a> 
- -->        <!-- <div class="lightbox-target" id="dog">
-          <img src="../images/placeholder.png"/>
-          <a class="lightbox-close" href="#"></a>
-       </div> -->
+      <img class="image" id="photo" src="../images/placeholder.png" alt="Food" width="500" height="300">
+
+              <!--The Modal -->
+        <div id="imgModal" class="modal">
+          <span class="close">x</span>
+          <img class="modal-content" id="img01">
+          <div id="caption"><p></p></div>
+        </div>  
+
     </div>
   </div>
 
