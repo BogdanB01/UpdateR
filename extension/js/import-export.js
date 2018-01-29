@@ -54,27 +54,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			                    }else{
 
-			                    	document.getElementById('drop-error').innerHTML += '<p>Invalid URL format! -> ' + links[i] + '</p>';
-
+			                    	//document.getElementById('drop-error').innerHTML += '<p>Invalid URL format! -> ' + links[i] + '</p>';
+			                    	showErrorMessage('drop-error', 'Invalid URL format -> ' + links[i]);
 			                    }
 
 		                	}
 	                    });
 
 	                }else {
-	                	document.getElementById('drop-error').innerHTML = '<p> Invalid JSON format !</p>';
+	                	//document.getElementById('drop-error').innerHTML = '<p> Invalid JSON format !</p>';
+	                	showErrorMessage('drop-error', 'Invalid JSON format');
+
 	                }
 
 	    		} catch (error) {
 	    			console.log("Error= " + error);
 	    			console.log('invalid json!');
-	    			document.getElementById('drop-error').innerHTML = '<p> Invalid JSON!</p>';
+	    			//document.getElementById('drop-error').innerHTML = '<p> Invalid JSON!</p>';
+	    			showErrorMessage('drop-error', 'Invalid JSON');
 	    		}
 	    	}
 	    	reader.readAsText(file);
 		}
 	    else {
-	 	   document.getElementById('drop-error').innerHTML = '<p> Incompatible tipe! Expected json file! </p>';
+	    	showErrorMessage('drop-error', 'Incompatible file type! Expected JSON file');
+	 	   //document.getElementById('drop-error').innerHTML = '<p> Incompatible tipe! Expected json file! </p>';
  		}
 	}
 

@@ -5,6 +5,8 @@
  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
  <link href="../css/settings-style.css" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
+
 </head>
 
 <body>
@@ -61,14 +63,17 @@
 
 
 <div id="urls-tab" class="tabcontent">
-  <p><b>updateR is enabled for the links listed below<b></p><br>
+  <h2><strong>updateR is enabled for the links listed below</strong></h2><br>
 
-      <span id="error-url"> </span>
 
       <p>
         <input id="new-task" type="text"><button id="addbutton"><b>Add URL</b></button>
       </p>
- 
+  
+      <div class="msg error" id="error-url">
+
+      </div>
+
     <br><br>
   
   <table id="my-table">
@@ -124,13 +129,20 @@
 
 <div id="import-export" class="tabcontent">
 
-  <h2> Import/Export settings </h2>
+  <h2> <strong> Import/Export settings </strong> </h2>
+
+   <div class="msg error" id="drop-error">
+        
+  </div>
+
   <div id="left">
   <div id="droppable"> 
       Drop file here or click to upload settings 
   </div>
   <input type="file" name="settings-file" id="input-file" accept=".json">
-  <output id="drop-error"> </output>
+  <!--<output id="drop-error"> </output> -->
+ 
+
   </div>
   <div id="right">
     <button type="submit" id="export-settings" class="horizontal-btn clear icon">Export</button>

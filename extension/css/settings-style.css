@@ -1,7 +1,8 @@
 body {
   margin: 30px;
   background: #ECEAE3;
-  font-family: 'Muli', Serif;
+  font-family: 'Arimo', sans-serif;
+
 }
 
 /* Style the tab */
@@ -58,7 +59,6 @@ div.tab button.active {
 }
 
 .infobox{
-  font-family: 'Open Sans';
   font-weight: 400;
   font-size: 14px;
   color: #323232;
@@ -120,7 +120,6 @@ div.tab button.active {
 #choose-button {
   background-color: transparent;
   font-size: 1.25em;
-  font-family: 'Ubuntu Mono', monospace;
   border-radius: 20px;
   border-color: #f44336;
   padding: 7px;
@@ -136,7 +135,6 @@ div.tab button.active {
   MARIUS PART 
 */
 table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
@@ -199,7 +197,6 @@ table tr:last-child td:last-child {
 body {
   margin: 30px;
   background: #ECEAE3;
-  font-family: 'Muli', Serif;
 }
 th, td{
   padding: 8px 20px;
@@ -232,7 +229,6 @@ input, button {
   font-size: 17px;
   width: 100px;
   margin: 10px 0 0;
-  font-family: Lato, sans-serif;
   cursor: pointer;
 }
 #addbutton:hover {
@@ -264,7 +260,6 @@ input[type="text"] {
   border: 1px solid #ddd;
   background: #fff;
   border-radius: 6px;
-  font-family: Lato, sans-serif;
   color: #888;
 }
 input[type="text"]:focus {
@@ -287,7 +282,6 @@ p > button:hover {
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300,400,600');
 * {
     /*box-sizing: border-box;*/
-    font-family: 'Open Sans',sans-serif,bold;
     font-weight: 300;
 }
 .hide { display: none }
@@ -549,7 +543,6 @@ input:checked + .slider:before {
   -webkit-border-radius: 10;
   -moz-border-radius: 10;
   border-radius: 5px;
-  font-family: helvetica, sans-serif;
   font-size: 20px;
   width: 100%;
   max-width: 140px;
@@ -615,3 +608,22 @@ input:checked + .slider:before {
 }
 
 /*EXPORT BUTTON CSS */
+
+.msg {
+  font-size: 13px;
+  padding: 15px 25px;
+  margin: 0px;
+  width: 400px;
+
+  display: none;
+}
+
+.error {
+  height: 13px;
+  /*color: hsla(0, 95%, 35%, 1);
+  border: 1px solid hsla(0, 95%, 35%, 1);
+  background-color: hsla(0, 15%, 97%, 1);*/
+  color: hsla(9, 87%, 46%, 1);
+  border: 1px solid hsla(9, 87%, 46%, 1);
+  background-color: hsla(9, 15%, 97%, 1);
+}

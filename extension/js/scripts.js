@@ -188,15 +188,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     addRowInTable(row);
                 } else {
-                    document.getElementById('error-url').innerHTML = "You're already following this url!";
+                    //document.getElementById('error-url').innerHTML = "You're already following this url!";
+                    showErrorMessage('error-url', "You're already following this url")
                 }
             });
         } else {
             //scream
             console.log('do something');
-            document.getElementById('error-url').innerHTML = 'Invalid url';
+            //document.getElementById('error-url').innerHTML = 'Invalid url';
+            showErrorMessage('error-url', 'Invalid url');
         }     
     });
+
 
     /**
     *   Function that changes to color of the sample web page with the new color provided by the user.
@@ -242,3 +245,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("culorica" + _color);
     });
 });
+
+function showErrorMessage(id, message) {
+    var element = document.getElementById(id);
+    element.innerHTML = message;
+    element.style.display = 'block'; 
+    setTimeout(function() {
+        element.style.display = 'none';
+    }, 3000);
+} 
