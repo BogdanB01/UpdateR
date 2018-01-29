@@ -345,9 +345,8 @@ td {
 #droppable {
   display: block;
   margin-top: 30px;
-
-  min-height: 170px;
-  width: 520px;
+  min-height: 300px;
+  width: 500px;
   margin: 0 auto;
   border: 2px dotted #9e9e9e;
   background: #efefef;
@@ -359,6 +358,7 @@ td {
   line-height: 150px;
   color: blue;
   cursor: pointer;
+  font-size: 150%;
 }
 
 #input-file {
@@ -428,6 +428,11 @@ input:checked + .slider:before {
   background-color: transparent;
   width: 29px;
   height: 28px;
+  margin-left:117px;
+}
+
+.btn:hover{
+  content: 'Start comparing';
 }
 
 .btnactive {
@@ -446,8 +451,14 @@ input:checked + .slider:before {
 .image{
   cursor: pointer;
   transition: 0.3s;
+  padding:1px;
+  border:1px solid #021a40;
   /*margin-top: 10%;
   margin-left: 35%;*/
+  object-fit: cover;
+  width: 450px;
+  height: 300px;
+
 }
 
 .image:hover{ opacity: 0.7;}
@@ -466,6 +477,11 @@ input:checked + .slider:before {
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.7);
 }
+
+.tabcontent {
+  height: 460px;
+}
+
 /* Modal Content (image) */
 .modal-content{
   margin: auto; 
@@ -528,3 +544,74 @@ input:checked + .slider:before {
 
 /*FINAL HISTORY IMAGE CSS */
 
+/*EXPORT BUTTON CSS */
+.horizontal-btn {
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 5px;
+  font-family: helvetica, sans-serif;
+  font-size: 20px;
+  width: 100%;
+  max-width: 140px;
+  height: 50px;
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 325px;
+  margin-top: 100px;
+  position: relative;
+}
+.horizontal-btn.icon {
+  padding-left: 36px;
+}
+.horizontal-btn.primary {
+  background: #85abda;
+  color: #fff;
+  border: 1px solid;
+}
+.horizontal-btn.primary:hover {
+  opacity: 0.75;
+}
+.horizontal-btn.clear {
+  border: 1px solid #d8d8d8;
+  background: transparent;
+}
+.horizontal-btn.clear:hover {
+  background-color: f7f7f7;
+}
+.horizontal-btn:hover {
+  cursor: pointer;
+  -webkit-box-shadow: inset 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.icon-export, .horizontal-btn#export-settings:before {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMy4yIiBoZWlnaHQ9IjIxIiB2aWV3Qm94PSIwIDAgMjMuMiAyMSI+ICA8ZGVmcz4gICAgPHN0eWxlPiAgICAgIC5jbHMtMSB7ICAgICAgICBmaWxsOiAjZjI3ZDNmOyAgICAgICAgZmlsbC1ydWxlOiBldmVub2RkOyAgICAgIH0gICAgPC9zdHlsZT4gIDwvZGVmcz4gIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEwMjE0LjYsMTc4LjU5MWExLjM2OSwxLjM2OSwwLDAsMCwuNy0wLjI1OWw1LjUtNS4wOTFhMS4wNTQsMS4wNTQsMCwwLDAsMC0xLjM5MiwxLDEsMCwwLDAtMS40LjAxbC0zLjgsMy41OFYxNjMuOTU1YTEsMSwwLDAsMC0yLDB2MTEuNDg0bC0zLjgtMy41OGExLjA2NCwxLjA2NCwwLDAsMC0xLjQtLjAxLDAuOTYsMC45NiwwLDAsMCwuMSwxLjM5Mmw1LjQsNS4wOTFBMS4xNTgsMS4xNTgsMCwwLDAsMTAyMTQuNiwxNzguNTkxWm0tMTAuNi0yLjg2NGEwLjk2LDAuOTYsMCwwLDAtMSwuOTYydjYuMzU5YTAuOTQ4LDAuOTQ4LDAsMCwwLDEsLjk1MmgyMS4yYTAuOTQ4LDAuOTQ4LDAsMCwwLDEtLjk1MlYxNzYuN2EwLjk1LDAuOTUsMCwxLDAtMS45LS4wMjdWMTgyLjFoLTE5LjR2LTUuNGEwLjk1MSwwLjk1MSwwLDAsMC0uOS0wLjk3MmgwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEwMjAzIC0xNjMpIi8+PC9zdmc+);
+  content: '';
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 21px;
+  margin: -12px 0px 0 -10px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 24px;
+}
+/* file size: 0.7ko | optimized file size: 0.7ko | base64 size: 0.9ko */
+.icon-import {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMyIgaGVpZ2h0PSIyMSIgdmlld0JveD0iMCAwIDIzIDIxIj4gIDxkZWZzPiAgICA8c3R5bGU+ICAgICAgLmNscy0xIHsgICAgICAgIGZpbGw6ICNmMjdkM2Y7ICAgICAgICBmaWxsLXJ1bGU6IGV2ZW5vZGQ7ICAgICAgfSAgICA8L3N0eWxlPiAgPC9kZWZzPiAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTAzNjMuNSwxNjNhMS4zNTksMS4zNTksMCwwLDAtLjcuMjU4bC01LjQsNS4wOTFhMS4xOTIsMS4xOTIsMCwwLDAtLjEsMS4zOTIsMSwxLDAsMCwwLDEuNC0uMDFsMy44LTMuNTh2MTEuNDg1YTEsMSwwLDAsMCwyLDBWMTY2LjE1MmwzLjgsMy41OGExLjA2LDEuMDYsMCwwLDAsMS40LjAxLDEuMTkyLDEuMTkyLDAsMCwwLS4xLTEuMzkybC01LjQtNS4wOTFBMC45NywwLjk3LDAsMCwwLDEwMzYzLjUsMTYzWm0tMTAuNSwxMi43MjdhMC45NTksMC45NTksMCwwLDAtMSwuOTYydjYuMzU4YTAuOTQ4LDAuOTQ4LDAsMCwwLDEsLjk1MmgyMWEwLjk0OCwwLjk0OCwwLDAsMCwxLS45NTJWMTc2LjdhMC45NSwwLjk1LDAsMSwwLTEuOS0uMDI3VjE4Mi4xaC0xOS4ydi01LjRhMC45NSwwLjk1LDAsMCwwLS45LTAuOTcyaDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAzNTIgLTE2MykiLz48L3N2Zz4=);
+  content: '';
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 21px;
+  margin: -12px 0px 0 -10px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 24px;
+}
+
+/*EXPORT BUTTON CSS */
