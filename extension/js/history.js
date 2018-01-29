@@ -252,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function changePhotoWhenClicked(dirname, filename){
 
+		document.getElementById('image-wrapper').style.display = 'block';
 		cs.readFile('screenshots/' + dirname + '/' + filename, function(data) {
 
 			document.getElementById('photo').src = data;
