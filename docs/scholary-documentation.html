@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>UpdateR - Scholary Raport</title>
-    <link rel="stylesheet" href="schlarly.css">
-    <link rel="stylesheet" href="http://scholarly.vernacular.io/scholarly.css">
+    <link rel="stylesheet" href="http://w3c.github.io/scholarly-html/css/scholarly.min.css">
     <script src="node_modules/prismjs/prism.js" defer></script>
   </head>
   <body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
@@ -82,13 +81,13 @@
               <strong> Componenta de tip dropdown </strong> se va deschide atunci cand utilizatorul va apasa pe butonul din browser. 
             </p>
             <center>
-              <img src="./images/popup_image.png"> 
+              <img src="./images/popup_image_1.png"> 
             </center>
             <p>
               In cazul in care va aparea o schimbare intr-o pagina vizata, acest lucru va fi semnalat catre utilizator prin o schimbare in imaginea default.
             </p>
             <center>
-              <img src="./images/popup_image_notif.png">
+              <img src="./images/popup_image_notif1.png">
             </center>
             <p>
               Prin apasarea pe imaginea respectiva se va deschide un meniu ce ii va oferi utilizatorului informatii si diverse posibilitati.
@@ -96,15 +95,28 @@
             
             <center>
               <img src="./images/dropdown.png">
+              <img src="./images/changes.png">
             </center>
             <p>
-              In cazul in care utilizatorul are adaugat in lista de urmarire site-ul curent, atunci acesta va vedea mesajul "Enabled on this site". In caz contrar, i se va afisa mesajul "Disabled on this site". 
+              In cazul in care utilizatorul are adaugat in lista de urmarire site-ul curent, atunci acesta va vedea mesajul "Enabled on this site". In caz contrar, i se va afisa mesajul "Disabled on this site". Daca mesajul este "Disabled on this site" , dand click pe acel label url-ul va fi adaugat in lista de url-uri pe care utilizatorul le urmareste. In cazul in care mesajul este "Enabled on this site" dand click pe label, url-ul va fi eliminat din lista. 
             </p>
             <p>
-              In cazul in care site-ul a suferit modificari de la ultima vizita a utilizatorului, acesta va vedea mesajul "View changes since last visit". Prin apasarea unui click pe acest mesaj, pagina va suferi modificari pentru a se evidentia cele mai recente noutati. (Mai multe despre acest subiect la prezentarea componentei de optiuni.)
+              In cazul in care site-ul a suferit modificari de la ultima vizita a utilizatorului, acesta va vedea mesajul "View changes since last visit". Daca utilizatorul va da click pe acest mesaj se va deschide o fereastra noua in care utilizatorul va vedea diferentele dintre cele 2 versiuni ale paginii. In partea din dreapta sus, el va avea la dispozitie 3 butoane:
+                <ol>
+                  <li> Last photo : Dand click pe acest button, pe pagina va aparea un screenshot al paginii care reprezinta pagina de dinaintea ultimei modificari </li>
+                  <li> Current photo: Dand click pe acest button, pe pagina va aparea screenshot-ul paginii de la vizita curenta. </li>
+                  <li> Diff photo: Dand click pe acest button, pe pagina va aparea o imagine prin care se vor sublinia diferentele intre cele doua pagini . Diferentele vor fi subliniate folosind o culoare care va putea fi schimbata de utilizator. </li>
+                </ol>
+
+              <center>
+                <img src="./images/diff.png" width="700px">
+              </center> 
             </p>
             <p>
-              De asemenea, utilizatorul va avea optiunea de a bloca temporar extensia. Prin apasarea pe mesajul Disable, un select se va deschide si ii va oferi utilizatorului optiunea de a bloca extensia pentru: 10 minute, 1 ora, 1 zi.
+              De asemenea, utilizatorul va avea optiunea de a bloca temporar extensia. Prin apasarea pe mesajul Disable, un select se va deschide si ii va oferi utilizatorului optiunea de a bloca extensia pentru: 10 minute, 1 ora, 1 zi. Apasand pe acest button, content-ul popup-ului se va schimba si utilizatorul nu va mai putea face nimic pana cand timpul ales nu va expira, sau va apasa pe butonul "Enable now" care va activa la loc extensia.
+              <center>
+                <img src="./images/disabled.png" >
+              </center> 
             </p>
             <p>
               Prin apasarea pe optiunea Settings, se va deschide o fereastra noua in care vor fi prezentate utilizatorului diverse posibilitati de configurare a aplicatiei.
@@ -113,12 +125,13 @@
             <br> <br>
 
             <p>
-              <strong>Componenta de setari </strong> consta dintr-o pagina HTML, in care utilizatorul va avea diverse optiuni. Aceasta este compusa dintr-un meniu orizontal format din 3 componente : 
+              <strong>Componenta de setari </strong> consta dintr-o pagina HTML, in care utilizatorul va avea diverse optiuni. Aceasta este compusa dintr-un meniu orizontal format din 4 componente : 
             </p>
             <ol>
               <li> View </li>
               <li> Urls Manager </li>
               <li> History </li>
+              <li> Import export</li>
             </ol>
 
             <center>
@@ -134,7 +147,7 @@
             </p>
 
             <center>
-              <img src="./images/view.png" width="500" height="250"> 
+              <img src="./images/view.png" width="700" height="250"> 
             </center>
 
             <br> <br>
@@ -153,7 +166,7 @@
 
 
               <center>
-               <img src="./images/url-manager.png" width="500" height="250"> 
+               <img src="./images/url-manager.png" width="700"> 
               </center>
              
             </p>  
@@ -163,11 +176,53 @@
               Optiunea History. <br>
               Dand click pe aceasta optiune, utilizatorul va putea vedea istoricul urmaririlor sale, si pentru fiecare site urmarit va putea sa observe modificarile petrecute in timp. Fiecare modificare va fi insotita de catre un printscreen al paginii la momentul respectiv pentru a se evidenta cat mai clar diferenta intre diverse versiuni ale paginii.
 
-              Datele sub structurate sub forma unei liste de liste. (O lista cu url-urile urmarite, si respectiv fiecare element al listei va avea o lista cu ultimile 5 modificari). Atunci cand se va apasa click pe o modificare, in partea dreapta a paginii, va aparea printscreen-ul cu starea paginii web la momentul respectiv.
               <center>
-               <img src="./images/history.png" width="500" height="250"> 
+               <img src="./images/history.png"> 
               </center>
+              <br>
+              <br>
+
+              Datele sub structurate sub forma unei liste de liste. (O lista cu url-urile urmarite, si respectiv fiecare element al listei va avea o lista cu modificarile aparute in timp). Atunci cand se va apasa click pe o modificare, in partea dreapta a paginii, va aparea printscreen-ul cu starea paginii web la momentul respectiv. Dand click pe aceasta imagine se va deschide un modal, pentru a vizualiza mai bine pagina. 
+              
+              <center>
+               <img src="./images/history2.png" width="700"> 
+              </center>
+              <br>
+              <br>
+              Utilizatorul va avea la dispozitie un buton "Turn on/off comparing". Daca butonul va fi setat pe on, atunci utilizatorul va avea posibilitatea de a alege 2 versiuni ale unei pagini si de a le compara. Utilizatorul nu va putea compara o versiune a unei pagini cu o versiune a altei pagini. 
+
+              <center> 
+                <img src="./images/compare-on.png">
+              </center>
+              
+
+              <center> 
+                <img src="./images/diff2.png" width="700">
+              </center>
+
             </p>
+
+            <br> <br>
+
+            <p>
+              Optiunea Import/Export <br>
+
+              Dand click pe aceasta optiune, utilizatorul va putea face import/export la anumite date. In partea dreapta a paginii va exista optiunea de import. Importul se va putea realiza prin drag-and-drop sau prin alegerea unui fisier cu ajutorul unui file-picker. Utilizatorul va putea importa numai fisiere de tip .json (altfel va primi o eroare), si fisiere care respecta un anumit format. 
+              Formatul in care va trebui facut import-ul este de tipul : <br>
+
+              { <br>
+                "color" : culoarea pe care utilizatorul vrea sa o aleaga, <br>
+                "links" : ["o", "lista", "cu", "url-uri", "pe", "care", "utilizatorul", "doreste", "sa", "le", "urmareasca"] <br>
+              } <br>
+
+              Apasand pe butonul export settings, un fisier cu acelasi format ca si cel de mai sus va fi descarcat pe pc-ul utilizatorului.
+
+              <center>
+                <img src="./images/import-export.png" width="700">
+              </center> 
+
+            </p>
+
           </p>
         </aside>
 
@@ -175,10 +230,11 @@
         <h2>Modelul datelor</h2>
         <aside typeof="schema:WPSideBar">
           <p>
-            Datele vor fi stocate folosing Chrome storage api. Am ales acest mod de stocare deoarece fata de local storage, putem stoca datele sub forma de obiecte, fata de stringuri, executa operatiile de scriere si citire asincron, prin urmare este mai rapid.
+            Datele vor fi stocate folosind Chrome storage api si FileSystem API.<br>
+            Am ales Chrome storage api  deoarece fata de local storage, putem stoca datele sub forma de obiecte, fata de stringuri, executa operatiile de scriere si citire asincron, prin urmare este mai rapid.
            </p>
            <p>
-            Se vor salva configurarile utilizatorului, pentru o experienta cat mai placuta. De asemenea la fiecare update al unei pagini se va salva un screenshot cu starea paginii dupa update si codul html al paginii, pentru a se vedea evolutia unei pagini in timp.
+            Am ales FileSystem API pentru a salva screenshot-urile paginilor, deoarece acestea au o dimensiune mare. Pentru fiecare url din lista de url-uri pe care un utilizator  le urmareste se va crea cate un director in directorul 'screenshots'. La stergerea unui url din lista de url-uri urmarite directorul va fi sters impreuna cu toate screenshot-urile acelei pagini.
            </p>
         </aside>
         </section>
@@ -210,5 +266,52 @@
 
         </aside>
       </section>  
+
+
+      <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2> Progresul proiectului </h2>
+        <aside typeof="schema:WPSideBar">
+          <p> 
+            Proiectul a ajuns intr-un stadiu final, am implementat toate optiunile pe care ni le-am dorit. <br>
+            Proiectul poate fi extins usor, pentru a se adauga noi alte functionalitati.
+          </p>
+        </aside>
+      </section>
+
+       <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2> Arhitectura </h2>
+        <aside typeof="schema:WPSideBar">
+          Proiectul este impartit in mai multe parti. Avem o componenta care ruleaza in background, o componenta pentru popup si o componenta pentru pagina de setari.
+          <br>
+
+          <h3> Componenta ce ruleaza in background: </h3> Aceasta componenta urmareste fiecare schimbare de url pe care o face utilizatorul. In cazul in care extensia este oprita nu se face nimic. In cazul in care extensia este pornita, se verifica daca url-ul se afla in lista de url-uri pe care utilizatorul le urmareste. In cazul in care url-ul este urmarit, se realizeaza un screenshot al paginii. Daca pagina este mai mare, script-ul comunica cu un content script, care ruleaza in interiorul paginii utilizatorului. Aceasta va face scroll in jos, pentru a se face screenshot la intreaga pagina. <br>
+          Dupa ce se realizeaza screenshot-ul se va compara cu screenshot-ul de la ultima vizita. In cazul in care cele 2 poze difera utilizatorul va fi notificat printr-un badge.
+          <br>
+          <h3> Componenta pentru pop-up: </h3> Aceasta componenta implementeaza diferite scenarii descrise mai sus, cum ar fi: oprirea temporara a extensiei, vizualizarea diferentelor dintre pagini, navigarea catre setari.
+          <br>
+
+          <h3> Componenta settings: </h3> Aceasta componenta implementeaza toate detaliile descrise mai sus la sectiunea de setari.
+
+
+        </aside>
+      </section>
+
+       <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2> Testarea proiectului </h2>
+        <aside typeof="schema:WPSideBar">
+          <p> 
+            Testarea proiectului s-a realizat manual.
+          </p>
+        </aside>
+      </section>
+
+       <section typeof="sa:MaterialsAndMethods" id="motivation">
+        <h2> Exploatarea solutiei realizate </h2>
+        <aside typeof="schema:WPSideBar">
+          <p> 
+            Per total, proiectul este usor de utilizat, intuitiv. Si un utilizator fara experienta ar putea exploata usor aplicatia.
+          </p>
+        </aside>
+      </section>
   </body>
 </html>
