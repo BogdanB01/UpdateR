@@ -1,4 +1,68 @@
+var cs = new ChromeStore();
+cs.init(1024 * 1024 * 1024);
+
+
 document.addEventListener('DOMContentLoaded', () => {
+
+	var enabled = document.getElementById('enabled');
+
+	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    	var url = tabs[0].url;
+		document.getElementById('hidden-url').innerText = url;
+
+		chrome.storage.sync.get({list: []}, function(data){
+			var found = false;
+			for(var i = 0; i < data.list.length; i++){
+				if(data.list[i].url == url) {
+					found = true;
+					enabled.innerText = 'Enabled on this site';
+				}
+			}
+			if(found == false) {
+				enabled.innerText = 'Disabled on this site';
+			}
+		});
+	});
+
+
+	enabled.addEventListener('click', function() {
+		var url = document.getElementById('hidden-url').innerText;
+		chrome.storage.sync.get({list: []}, function(data) {
+			
+			if(enabled.innerText == 'Enabled on this site') {
+				for(var i = 0; i < data.list.length; i++) {
+					console.log(data.list[i].url);
+					if(data.list[i].url == url) {
+						data.list.splice(i, 1);
+					}
+				}
+				cs.deleteDir('screenshots/'+getDirnameFromUrl(url), {recursive: true}, function() {
+            	});
+
+				enabled.innerText = 'Disabled on this site';
+				
+			} else if (enabled.innerText == 'Disabled on this site') {
+				var newRecord = {
+					url : url,
+					time: ''
+				};
+
+				data.list.push(newRecord);
+				
+				cs.getDir('screenshots/'+getDirnameFromUrl(url), {create : true}, function() {
+              		console.log('created url ')
+                });
+				enabled.innerText = 'Enabled on this site';
+			}
+
+			console.log(data.list);
+
+			chrome.storage.sync.set({
+                    list:data.list
+            });
+		});
+		
+	});
 
 	//remove badge if it's the case
 	chrome.browserAction.getBadgeText({}, function(result) {
@@ -154,11 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 			});
 
-		});
-
-		
-
+		});		
 	});
 
-
+	function getDirnameFromUrl(url) {
+       return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
+    }
 });

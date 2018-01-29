@@ -4,11 +4,10 @@
 <head>
     
     <script type="text/javascript" src="js/resemble.js"></script>
+    <script type="text/javascript" src="js/chromestore.js"></script>
     <script type="text/javascript" src="popup.js"> </script>
-      
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-
 
     <style>
       body {
@@ -103,10 +102,17 @@
         text-align: center;
       }
 
+      #hidden-url {
+        display: none;
+      }
+
     </style>
 </head>
 
 <header>
+
+  <span id="hidden-url">  </span>
+
   <div id="banner">
     <img id="logo" src="images/updaterlogo.png" height="90">
   <div>
@@ -117,6 +123,10 @@
     <ul id="menu">
 
     
+      <li id="enabled" class="menu-item">
+
+      </li>
+
     	<li id="changes-yes" class="menu-item">
     		View changes since last visit
     	</li>

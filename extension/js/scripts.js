@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     */
     function deleteRowFromTable(row){
         row.parentNode.removeChild(row);       
+
         var url = row.getElementsByTagName('td')[0].innerText;
 
         chrome.storage.sync.get({list:[]}, function(data){
