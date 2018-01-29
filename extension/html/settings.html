@@ -73,9 +73,9 @@
   
   <table id="my-table">
     <tr>
-      <th>URL</th>
-      <th>Beginning date</th>
-      <th>Remove</th>
+      <th width="45%" style="font-weight: bold">URL</th>
+      <th width="45%" style="font-weight: bold">Beginning date</th>
+      <th width="30%" style="font-weight: bold">Remove</th>
     </tr>
   
   </table>
@@ -109,7 +109,7 @@
 
   <div id="right">
     <div id="image-wrapper"> 
-      <img class="image" id="photo" src="../images/placeholder.png" alt="Food" width="500" height="300">
+      <img class="image" id="photo" src="../images/placeholder.png" alt="Food">
 
               <!--The Modal -->
         <div id="imgModal" class="modal">
@@ -126,16 +126,17 @@
 <div id="import-export" class="tabcontent">
 
   <h2> Import/Export settings </h2>
-
+  <div id="left">
   <div id="droppable"> 
       Drop file here or click to upload settings 
   </div>
   <input type="file" name="settings-file" id="input-file" accept=".json">
   <output id="drop-error"> </output>
-
-  <div>
-    <button id="export-settings"> Export </button>
   </div>
+  <div id="right">
+    <button type="submit" id="export-settings" class="horizontal-btn clear icon">Export</button>
+  </div>
+
 </div>
 
 

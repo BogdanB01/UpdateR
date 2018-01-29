@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	    if(file.type == 'application/json' || file.name.endsWith('.json')) {
 	    	reader.onload = function(event) {
 	    		var contents = event.target.result;
+	    		var validJSONFormat = true;
 
 	    		try {
 	    			let settings = JSON.parse(contents);
@@ -22,40 +23,47 @@ document.addEventListener('DOMContentLoaded', () => {
 					Object.keys(settings).forEach(function (key) {
 
 						if(key != 'color' && key != 'links'){
-							document.getElementById('drop-error').innerHTML = '<p> Invalid JSON format !</p>';
+							validJSONFormat = false;
+							return;
 						}
 
 					});	
 
-					var color = settings.color;
-					var links = settings.links;
+					if(validJSONFormat == true){
 
-					chrome.storage.sync.set({"color": color}, function(){
-			            var event = new Event('change');
-			            document.querySelector("#color-picker").dispatchEvent(event);
+						var color = settings.color;
+						var links = settings.links;
 
-			        });
+						chrome.storage.sync.set({"color": color}, function(){
+				            var event = new Event('change');
+				            document.querySelector("#color-picker").dispatchEvent(event);
 
-					var regex = RegExp('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})');
+				        });
 
-		            chrome.storage.sync.get({list: []}, function(data){
+						var regex = RegExp('(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})');
 
-		            	for(var i = 0 ; i < links.length; i++){
+			            chrome.storage.sync.get({list: []}, function(data){
 
-							var entry = links[i];
+			            	for(var i = 0 ; i < links.length; i++){
 
-							if(entry.match(regex)){
-								
-								addLinkToList(entry , data);
+								var entry = links[i];
 
-		                    }else{
+								if(entry.match(regex)){
+									
+									addLinkToList(entry , data);
 
-		                    	document.getElementById('drop-error').innerHTML += '<p>Invalid URL format! -> ' + links[i] + '</p>';
+			                    }else{
 
-		                    }
+			                    	document.getElementById('drop-error').innerHTML += '<p>Invalid URL format! -> ' + links[i] + '</p>';
 
-	                	}
-                    });
+			                    }
+
+		                	}
+	                    });
+
+	                }else {
+	                	document.getElementById('drop-error').innerHTML = '<p> Invalid JSON format !</p>';
+	                }
 
 	    		} catch (error) {
 	    			console.log("Error= " + error);

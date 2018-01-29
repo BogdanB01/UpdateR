@@ -45,6 +45,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
     }
 
+    function getInitialPhotoName(photo){
+    	photo += '.png';
+    	photo = photo.replace(':','_')
+					 .replace(':','_')
+					 .replace(' ','_')
+					 .replace(':','_')
+					 .replace(':','_')
+					 .replace(':','_');
+
+		return photo;
+    }
+
     var ids = [];
 
 	function populateHistoryTab(){
@@ -108,7 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		    						anotherLabel.setAttribute("id" , i + "-" + j);
 		    						anotherLabel.className += " numefisier";
 
-		    						anotherLabel.innerText = arr[j].name;
+		    						anotherLabel.innerText = arr[j].name.replace('.png','')
+		    															.replace('_',':')
+		    															.replace('_',':')
+		    															.replace('_','  ')
+		    															.replace('_',':')
+		    															.replace('_',':');
 
 		    						anotherUl.appendChild(anotherInput);
 		    						anotherLi.appendChild(anotherLabel);
@@ -119,13 +136,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		    							if ( ! button.checked ){
 
-		    								changePhotoWhenClicked(getDirnameFromUrl(data.list[i].url), e.target.innerText);
+		    								changePhotoWhenClicked(getDirnameFromUrl(data.list[i].url), getInitialPhotoName(e.target.innerText));
 
 			    						}
 
 			    						else {
 
-		    								changePhotoWhenClicked(getDirnameFromUrl(data.list[i].url), e.target.innerText);
+		    								changePhotoWhenClicked(getDirnameFromUrl(data.list[i].url), getInitialPhotoName(e.target.innerText));
 		    								document.getElementById(this.id).className += " toggle-focused";
 
 		    								if( (ids.length == 1 && this.id == ids[0] ) || 
@@ -208,8 +225,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	function getPhotoNameById(id){
+		
+		photoName = getInitialPhotoName(document.getElementById(id).innerText);
 
-		return document.getElementById(id).innerText;
+		return photoName;
 
 	}
 
