@@ -11,6 +11,10 @@ div.tab {
     background-color: #f1f1f1;
 }
 
+.tablinks {
+  font-weight: bold;
+}
+
 /* Style the buttons inside the tab */
 div.tab button {
     background-color: inherit;
@@ -245,6 +249,12 @@ label[for='new-task'] {
   margin: 0;
   text-transform: uppercase;
 }
+
+
+label {
+  max-width: 500px;
+}
+
 input[type="text"] {
   margin: 0;
   font-size: 18px;
@@ -311,8 +321,8 @@ p > button:hover {
 .inner {
   text-align: left;
   padding: 0 1em;
-  overflow: hidden;
-  max-height: 0;
+  overflow: auto;
+  max-height: 0px;
   width: 37%;
   
   transition: max-height .6s ease;
@@ -517,3 +527,4 @@ input:checked + .slider:before {
 
 
 /*FINAL HISTORY IMAGE CSS */
+
