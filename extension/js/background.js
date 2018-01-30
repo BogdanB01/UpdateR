@@ -312,9 +312,9 @@ var takeScreenshot = {
 
 						if (lastCapture) {
 							self.resetPage();
-							newWindow = window.open();
+							/*newWindow = window.open();
 							newWindow.document.write("<style type='text/css'>body {margin: 0;}</style>");
-							newWindow.document.write("<img src='" + self.screenshotCanvas.toDataURL("image/png") + "'/>");
+							newWindow.document.write("<img src='" + self.screenshotCanvas.toDataURL("image/png") + "'/>");*/
 							savePhoto(self.dirname, self.screenshotCanvas.toDataURL('image/png'));
 
 						} else {
