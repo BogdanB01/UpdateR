@@ -3,10 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	var cs = new ChromeStore();
     cs.init(1024 * 1024 * 1024);
 
+    /**
+	* Gets the director name saved in chrome storage 
+	* @param: url - link datetime when added
+	*/
 	function getDirnameFromUrl(url) {
         return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
     }
 
+    /**
+	* Processes dropped file (JSON) 
+	* @param: file - JSON with user settings
+	*/
 	function processFile(file){
 		var reader = new FileReader();
 	    
@@ -18,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	    		try {
 	    			let settings = JSON.parse(contents);
-	    			/*console.log(settings);*/
 					
 					Object.keys(settings).forEach(function (key) {
 
@@ -53,8 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 									addLinkToList(entry , data);
 
 			                    }else{
-
-			                    	//document.getElementById('drop-error').innerHTML += '<p>Invalid URL format! -> ' + links[i] + '</p>';
 			                    	showErrorMessage('drop-error', 'Invalid URL format -> ' + links[i]);
 			                    }
 
@@ -62,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	                    });
 
 	                }else {
-	                	//document.getElementById('drop-error').innerHTML = '<p> Invalid JSON format !</p>';
 	                	showErrorMessage('drop-error', 'Invalid JSON format');
 
 	                }
@@ -70,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	    		} catch (error) {
 	    			console.log("Error= " + error);
 	    			console.log('invalid json!');
-	    			//document.getElementById('drop-error').innerHTML = '<p> Invalid JSON!</p>';
 	    			showErrorMessage('drop-error', 'Invalid JSON');
 	    		}
 	    	}
@@ -78,10 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	    else {
 	    	showErrorMessage('drop-error', 'Incompatible file type! Expected JSON file');
-	 	   //document.getElementById('drop-error').innerHTML = '<p> Incompatible tipe! Expected json file! </p>';
  		}
 	}
 
+	/**
+	* Handles file selection 
+	* @param: evt - event
+	*/
 	function handleFileSelect(evt) {
 	    evt.stopPropagation();
 	    evt.preventDefault();
@@ -90,10 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	    processFile(files[0]);
  	}
 
+ 	/**
+	* Handles file selection on click 
+	* @param: event - event
+	*/
  	function handleFileSelectOnClick(event){
 		processFile(event.target.files[0]);
 	}
 
+	/**
+	* Handles dragging files over box 
+	* @param: evt - event
+	*/
 	function handleDragOver(evt) {
 	    evt.stopPropagation();
 	    evt.preventDefault();
@@ -150,6 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 	});
 
+	/**
+	* Adds user links preferences from imported JSON in app 
+	* @param: entry - link
+	* @param: data - chrome storage reference
+	*/
 	function addLinkToList(entry, data){
 
 		var currentdate = new Date();

@@ -41,10 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	});
 
+	/**
+	* Gets the director name saved in chrome storage 
+	* @param: url - link datetime when added
+	*/
 	function getDirnameFromUrl(url) {
         return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
     }
 
+    /**
+	* Gets the initial photo name from storage , 
+	* after being modified in history page 
+	* @param: photo - image name
+	*/
     function getInitialPhotoName(photo){
     	photo += '.png';
     	photo = photo.replace(':','_')
@@ -59,6 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     var ids = [];
 
+    /**
+	* Dynamically populates History tab
+	*/
 	function populateHistoryTab(){
 
 		chrome.storage.sync.get({list: []}, function(data){
@@ -179,6 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
 	var cs = new ChromeStore();
 	cs.init(1024 * 1024 * 1024 , populateHistoryTab);
 
+	/**
+	* Gets Rgb format of a color from Hex format
+	* @param: hex - hex color
+	*/
+	function hexToRgb(hex) {
+    	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    	return result ? {
+       		red: parseInt(result[1], 16),
+       		green: parseInt(result[2], 16),
+       		blue: parseInt(result[3], 16)
+    	} : null;
+	}
+
 	document.getElementById("compare-image").addEventListener("click" , function(e){
 
 		if(ids.length < 2){
@@ -200,18 +225,24 @@ document.addEventListener('DOMContentLoaded', () => {
 				var dirname = getDirnameFromUrl(document.getElementById(ids[0])
 								.parentElement.parentElement.parentElement.parentElement.innerText.split('\n')[0]);
 
-				cs.readFile('screenshots/' + dirname + '/' + firstPhotoName, function(data) {
+				cs.readFile('screenshots/' + dirname + '/' + firstPhotoName, function(data){
 
 					cs.readFile('screenshots/' + dirname + '/' + secondPhotoName , function(data2){
 
-						var resembleControl = resemble(data).compareTo(data2).onComplete(function(data3){
+						chrome.storage.sync.get("color" , function(data3){
 
-							/*document.getElementById('mockup').src = data3.getImageDataUrl();*/
+							resemble.outputSettings({
+								errorColor: hexToRgb(data3.color)
+							});
 
-							var newWindow = window.open();
+							var resembleControl = resemble(data).compareTo(data2).onComplete(function(data4){
 
-							newWindow.document.write("<style type='text/css'>body {margin: 0;}</style>");
-							newWindow.document.write("<img src='" + data3.getImageDataUrl() + "' />");
+								var newWindow = window.open();
+
+								newWindow.document.write("<style type='text/css'>body {margin: 0;}</style>");
+								newWindow.document.write("<img src='" + data4.getImageDataUrl() + "' />");
+
+							});
 
 						});
 
@@ -224,6 +255,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	});
 
+	/**
+	* Gets photo name by the unique id from labels
+	* @param: id - label photo id
+	*/
 	function getPhotoNameById(id){
 		
 		photoName = getInitialPhotoName(document.getElementById(id).innerText);
@@ -232,6 +267,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	}
 
+	/**
+	* Validates photos selection when comparing images activated 
+	* @param: current_id - clicked photo label
+	*/
 	function validatePhotosSelection(current_id){
 
 		if (ids.length == 2) 
@@ -269,6 +308,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	}
 
+	/**
+	* Changes photo from History tab when a label was clicked
+	* @param: dirname - director from chrome storage
+	* @param: filename - photo name
+	*/
 	function changePhotoWhenClicked(dirname, filename){
 
 		document.getElementById('image-wrapper').style.display = 'block';

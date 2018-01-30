@@ -64,8 +64,6 @@
 
 <div id="urls-tab" class="tabcontent">
   <h2><strong>updateR is enabled for the links listed below</strong></h2><br>
-
-
       <p>
         <input id="new-task" type="text"><button id="addbutton"><b>Add URL</b></button>
       </p>
@@ -73,7 +71,6 @@
       <div class="msg error" id="error-url">
 
       </div>
-
     <br><br>
   
   <table id="my-table">
@@ -82,15 +79,12 @@
       <th width="45%" style="font-weight: bold">Beginning date</th>
       <th width="30%" style="font-weight: bold">Remove</th>
     </tr>
-  
   </table>
 </div>
 
 
 <div id="another-tab" class="tabcontent">
-
   <br><br>
-
   <label style="padding-left: 8px;"><font size="4"><b>Turn ON/OFF Comparing</b></font></label>
   <label class="switch" id="compare-button">
     <input id="button-input" type="checkbox" style="float: right;">
@@ -99,17 +93,13 @@
 
   <input type="button" class="btn" id="compare-image">
 
-
   <br><br>
   <div id="left">
-
     <div style="overflow-y: auto; max-height: 280px">  
       <ul id="historylist">
 
       </ul>
     </div>
-
-  
   </div>
 
   <div id="right">
@@ -121,10 +111,8 @@
           <img class="modal-content" id="img01">
           <div id="caption"><p></p></div>
         </div>  
-
     </div>
   </div>
-
 </div>
 
 <div id="import-export" class="tabcontent">
@@ -138,27 +126,22 @@
           }
       </span></a></p>
 
-   <div class="msg error" id="drop-error">
-        
-  </div>
+      <div class="msg error" id="drop-error">
+            
+    </div>
 
-  <div id="left">
-  <div id="droppable"> 
-      Drop file here or click to upload settings 
-  </div>
-  <input type="file" name="settings-file" id="input-file" accept=".json">
-  <!--<output id="drop-error"> </output> -->
- 
+    <div id="left">
+      <div id="droppable"> 
+          Drop file here or click to upload settings 
+      </div>
+      <input type="file" name="settings-file" id="input-file" accept=".json">
+    </div>
 
-  </div>
   <div id="right">
     <button type="submit" id="export-settings" class="horizontal-btn clear icon">Export</button>
   </div>
 
 </div>
-
-
-
 
 </body>
 </html>
