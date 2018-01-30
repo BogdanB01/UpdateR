@@ -349,7 +349,7 @@ td {
   box-sizing: border-box;
   text-align: center;
   vertical-align: middle;
-  line-height: 150px;
+  line-height: 260px;
   color: blue;
   cursor: pointer;
   font-size: 150%;
@@ -643,7 +643,7 @@ input:checked + .slider:before {
   border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; 
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
   font-family: Calibri, Tahoma, Geneva, sans-serif;
-  position: absolute; left: 43em; top: 2em; z-index: 99;
+  position: absolute; left: 2em; top: 2em; z-index: 99;
   margin-left: 0; 
   width: 250px;
 }
