@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	var enabled = document.getElementById('enabled');
 
+
+	/**
+	* Gets current url in order to follow or unfollow link
+	*/
+
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     	var url = tabs[0].url;
 		document.getElementById('hidden-url').innerText = url;
@@ -25,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 
+	/**
+	*	Implements follow/unfollow mechanism. If the message is 'Disabled on this site' clicking on the label will add the link to followed links
+	*/
 	enabled.addEventListener('click', function() {
 		var url = document.getElementById('hidden-url').innerText;
 		chrome.storage.sync.get({list: []}, function(data) {
@@ -44,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			} else if (enabled.innerText == 'Disabled on this site') {
 				var newRecord = {
 					url : url,
-					time: ''
+					time: getDate()
 				};
 
 				data.list.push(newRecord);
@@ -78,7 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	});
 	
-
+	/**
+	*	Checks if the extension is disabled. If it's disabled it will update the body of the extension
+	*/
 	chrome.storage.sync.get("disabled", function(data) {
 
 		var now = new Date();
@@ -98,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 
+	/**
+	*	If the extension is disabled clicking on the enable-now button will update the body of the pop-up and enable the extension
+	*/
 	document.getElementById('stop-disabled').addEventListener('click', function() {
 
 		document.getElementById('disabled-extension').style.display = 'none';
@@ -116,12 +129,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	});
 
+
+	/**
+	*	Changes the body of the popup between the 2 views: enabled and disabled
+	*/ 
 	function disableExtension(time) {
 		document.getElementById('wrapper').style.display = 'none';
 		document.getElementById('disabled-extension').style.display = 'block';
 		document.getElementById('time-untill').innerText = time.toString();
 	}
 
+
+	/**
+	*	Disables the extension for a time. The user can choose between 3 intervals: 10 minute, 1 hour, 1 day
+	*/
 	document.getElementById('disable-select').addEventListener('change', function() {
 		
 		var selectOption = document.getElementById('disable-select').value;
@@ -174,6 +195,12 @@ document.addEventListener('DOMContentLoaded', () => {
  
 	});
 
+	/**
+	*	Converts a hex value to a rgb value in order to be used by resemble
+	* @param: hex - the hex value that will be converted
+	* @return: the hex value converted to rgb
+	*/
+
 	function hexToRgb(hex) {
     	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     	return result ? {
@@ -184,6 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 
+	/**
+	*	Opens the diff page in a new window and display changes.
+	*/
 	document.getElementById('changes-yes').addEventListener('click', function() {
 
 		//get color from chrome store
@@ -200,8 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			var resembleControl = resemble(lastPhoto).compareTo(currentPhoto).onComplete(function(data) {
 				var diffImage = new Image();
 				diffImage.src = data.getImageDataUrl();
-
-				console.log(data);
 
 				newWindow = window.open();
 				newWindow.document.write("<style type='text/css'>body {margin: 0;} .topright { position: absolute; top: 8px; right: 16px; }  p {display:none} </style>");
@@ -225,3 +253,31 @@ document.addEventListener('DOMContentLoaded', () => {
        return url.replace(/\/|:|\?|"|\<|\>|\.|\*|\|/g, '_');
     }
 });
+
+
+/**
+*	Pads a number with a specific number of zeroes
+* @param: x - the number
+* @param: n - number of zeroes
+*/
+function addZero(x,n) {
+    while (x.toString().length < n) {
+        x = "0" + x;
+    }
+    return x;
+}
+
+/**
+* Gets date in friendly format
+*/
+function getDate() {
+	var d = new Date();
+	var day = addZero(d.getDate(), 2);
+	var month = addZero(d.getMonth() + 1);
+	var year = d.getFullYear();
+	var hours = addZero(d.getHours(), 2);
+	var minutes = addZero(d.getMinutes(), 2);
+	var seconds = addZero(d.getSeconds(), 2);
+
+	return day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds;
+}

@@ -631,10 +631,27 @@ input:checked + .slider:before {
 
 /*TOOLTIP INFO BUTTON*/
 .tooltip {
-      color: #000000; outline: none;
-      cursor: help; text-decoration: none;
-      position: relative;
-    }
+
+    display: inline-block;
+    padding: 0; 
+    font-size: 12px;
+    font-weight: lighter !important;
+    line-height: 20px; 
+    color: #fff !important;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: blue;
+    border-radius: 50px;
+    position: relative;
+    top: -3px;
+    height: 20px;
+    width: 20px;
+    outline: none;
+    cursor: help;
+    text-decoration: none;
+    font-weight: 900;
+  }
 .tooltip span {
   margin-left: -999em;
   position: absolute;
@@ -657,5 +674,6 @@ input:checked + .slider:before {
 }
 * html a:hover { background: transparent; }
 .info { background: #9FDAEE; border: 1px solid #2BB0D7; }
+
 
 

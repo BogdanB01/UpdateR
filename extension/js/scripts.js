@@ -120,6 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
     populateTable();
 
 
+    /**
+    *  Function that check if a url is in the followed list
+    * @param: url - the url that we want to check if it's followed
+    */
     function checkIfUrlIsFollowed(url) {
         return new Promise((resolve, reject) => {
             chrome.storage.sync.get({list: []}, function(data){
@@ -246,6 +250,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+/**
+*   Function that displays an error message that will dissapear after 3 seconds. 
+* @param: id - the id of the element where the message will be dispalyed
+* @param: message - the error message that will be displayed
+*/
 function showErrorMessage(id, message) {
     var element = document.getElementById(id);
     element.innerHTML = message;
